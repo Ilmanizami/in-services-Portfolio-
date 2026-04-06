@@ -27,20 +27,22 @@ const projects = [
   },
   {
     title: "AES Side-Channel Attack (FYP)",
-    desc: "Final Year Project: AI-based analysis of AES Side-Channel Attacks using deep learning and TensorFlow.",
-    tech: ["AI", "TensorFlow", "Security"],
+    desc: "Final Year Project: AI-based analysis of AES Side-Channel Attacks using deep learning, TensorFlow, and neural networks for hardware security research.",
+    tech: ["AI", "TensorFlow", "Security", "DLSCA"],
   },
   {
-    title: "Panaflex Designs for FYP Students",
-    desc: "Professional panaflex and poster designs for final year project presentations — end-to-end from report analysis to on-location delivery.",
-    tech: ["Design", "Print", "Delivery"],
+    title: "Panaflex & Design Services",
+    desc: "Professional panaflex, poster, and branding designs for FYP students and businesses — end-to-end from analysis to on-location delivery.",
+    tech: ["Design", "Print", "Branding"],
   },
 ];
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-24 bg-secondary/30">
-      <div className="container mx-auto px-4">
+    <section id="projects" className="py-24 bg-secondary/20 relative">
+      <div className="floating-orb w-64 h-64 bg-accent right-0 top-10" />
+
+      <div className="container mx-auto px-4 relative z-10">
         <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-4">
           Featured <span className="text-gradient">Projects</span>
         </h2>
@@ -48,9 +50,9 @@ const ProjectsSection = () => {
           A mix of technical builds, AI research, and creative work.
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 perspective-container">
           {projects.map((project) => (
-            <div key={project.title} className="glass-card p-6 flex flex-col hover:border-primary/50 transition-all group">
+            <div key={project.title} className="glass-card-3d p-6 flex flex-col hover:border-primary/50 group">
               <h3 className="font-display text-lg font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">{project.title}</h3>
               <p className="text-sm text-muted-foreground mb-4 flex-1">{project.desc}</p>
               <div className="flex flex-wrap gap-2 mb-4">
