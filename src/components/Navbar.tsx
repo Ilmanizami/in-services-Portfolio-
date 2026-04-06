@@ -8,13 +8,23 @@ const navItems = [
   { label: "Services", path: "/services" },
 ];
 
+const scrollItems = [
+  { label: "About", id: "about" },
+  { label: "Experience", id: "experience" },
+  { label: "Projects", id: "projects" },
+  { label: "Contact", id: "contact" },
+];
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
   const scrollTo = (id: string) => {
     setOpen(false);
-    if (location.pathname !== "/") return;
+    if (location.pathname !== "/") {
+      window.location.href = `/#${id}`;
+      return;
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -23,10 +33,10 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="IN Logo" className="h-9 w-9 rounded-full" />
-          <span className="font-display font-bold text-lg text-foreground">Ilma Nizami</span>
+          <span className="font-display font-bold text-lg text-foreground">IN Services</span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
             <Link
               key={item.path}
@@ -38,9 +48,11 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
-          <button onClick={() => scrollTo("about")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">About</button>
-          <button onClick={() => scrollTo("projects")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Projects</button>
-          <button onClick={() => scrollTo("contact")} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Contact</button>
+          {scrollItems.map((item) => (
+            <button key={item.id} onClick={() => scrollTo(item.id)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              {item.label}
+            </button>
+          ))}
         </div>
 
         <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
@@ -53,9 +65,9 @@ const Navbar = () => {
           {navItems.map((item) => (
             <Link key={item.path} to={item.path} onClick={() => setOpen(false)} className="block text-sm font-medium text-muted-foreground hover:text-primary py-2">{item.label}</Link>
           ))}
-          <button onClick={() => scrollTo("about")} className="block text-sm font-medium text-muted-foreground hover:text-primary py-2 w-full text-left">About</button>
-          <button onClick={() => scrollTo("projects")} className="block text-sm font-medium text-muted-foreground hover:text-primary py-2 w-full text-left">Projects</button>
-          <button onClick={() => scrollTo("contact")} className="block text-sm font-medium text-muted-foreground hover:text-primary py-2 w-full text-left">Contact</button>
+          {scrollItems.map((item) => (
+            <button key={item.id} onClick={() => scrollTo(item.id)} className="block text-sm font-medium text-muted-foreground hover:text-primary py-2 w-full text-left">{item.label}</button>
+          ))}
         </div>
       )}
     </nav>
