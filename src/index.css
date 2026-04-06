@@ -79,6 +79,18 @@
     box-shadow: var(--shadow-card);
   }
 
+  .glass-card-3d {
+    @apply bg-card/60 backdrop-blur-xl border border-border/50 rounded-xl;
+    box-shadow: var(--shadow-card);
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .glass-card-3d:hover {
+    transform: perspective(800px) rotateY(-5deg) rotateX(5deg) translateZ(20px);
+    box-shadow: 0 20px 60px hsl(265 60% 55% / 0.2), 0 0 40px hsl(265 60% 55% / 0.1);
+  }
+
   .glow-border {
     @apply relative;
   }
@@ -106,6 +118,31 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  @keyframes fade-in-scale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slide-in-left {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(60px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(265 60% 55% / 0.2); }
+    50% { box-shadow: 0 0 40px hsl(265 60% 55% / 0.4), 0 0 80px hsl(265 60% 55% / 0.1); }
+  }
+
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
   .animate-fade-up {
     animation: fade-up 0.6s ease-out forwards;
   }
@@ -121,5 +158,51 @@
   .animate-fade-up-delay-3 {
     animation: fade-up 0.6s ease-out 0.3s forwards;
     opacity: 0;
+  }
+  .animate-fade-up-delay-4 {
+    animation: fade-up 0.6s ease-out 0.4s forwards;
+    opacity: 0;
+  }
+
+  .animate-scale-in {
+    animation: fade-in-scale 0.5s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-rotate-slow {
+    animation: rotate-slow 20s linear infinite;
+  }
+
+  .perspective-container {
+    perspective: 1000px;
+  }
+
+  .tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+  }
+
+  .tilt-card:hover {
+    transform: rotateY(-8deg) rotateX(4deg);
+  }
+
+  .parallax-bg {
+    transform: translateZ(-1px) scale(2);
+  }
+
+  .floating-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(265 60% 55% / 0.3), transparent);
   }
 }
