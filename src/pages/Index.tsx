@@ -2,9 +2,12 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ExperienceSection from "@/components/ExperienceSection";
-import ProjectsSection from "@/components/ProjectsSection";
+import CreativePortfolio from "@/components/CreativePortfolio";
+import PremiumTools from "@/components/PremiumTools";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
+import FloatingCTA from "@/components/FloatingCTA";
 
 const Index = () => {
   return (
@@ -16,11 +19,15 @@ const Index = () => {
       <div className="section-divider" />
       <ExperienceSection />
       <div className="section-divider" />
-      <ProjectsSection />
+      <CreativePortfolio />
+      <div className="section-divider" />
+      <PremiumTools />
       <div className="section-divider" />
       <TestimonialsSection />
       <div className="section-divider" />
       <ContactSection />
+      <Footer />
+      <FloatingCTA />
     </div>
   );
 };
