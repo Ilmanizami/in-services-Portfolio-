@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 const navItems = [
   { label: "Home", path: "/" },
   { label: "Services", path: "/services" },
+  { label: "Gallery", path: "/gallery" },
 ];
 
 const scrollItems = [
@@ -32,7 +33,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="IN Logo" className="h-9 w-9 rounded-full" />
+          <img src={logo} alt="IN Logo" className="h-9 w-9 rounded-full border border-primary/30 shadow-[0_0_12px_hsl(265_60%_55%/0.3)]" />
           <span className="font-display font-bold text-lg text-foreground">IN Services</span>
         </Link>
 

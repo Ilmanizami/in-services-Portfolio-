@@ -28,7 +28,7 @@ const HeroSection = () => {
             <img
               src={logo}
               alt="IN Logo"
-              className="w-32 h-32 rounded-full mx-auto mb-8 animate-pulse-glow shadow-[0_0_60px_hsl(265_60%_55%/0.3)] border-2 border-primary/30"
+              className="w-32 h-32 rounded-full mx-auto mb-8 animate-pulse-glow shadow-[0_0_60px_hsl(265_60%_55%/0.4)] border-2 border-primary/40 object-cover bg-background/50"
             />
           </div>
         </div>
