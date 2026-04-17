@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
-import { ExternalLink, Github, BadgeCheck, Layers, Palette, Film, Heart, FileText, PenTool } from "lucide-react";
+import { ExternalLink, Github, BadgeCheck, Layers, Palette, Film, Heart, FileText, PenTool, Globe } from "lucide-react";
 
 type Category = "all" | "3d-motion" | "character-art" | "branding" | "print" | "stationary" | "web";
 
@@ -114,8 +114,9 @@ const projects = [
     cat: "web" as Category,
     title: "Full-Stack Portfolio Development",
     client: "Ameen Uddin Ahmed",
-    desc: "Developed and deployed a sleek, responsive web-based portfolio using modern web technologies.",
+    desc: "Developed and deployed a sleek, responsive web-based portfolio using modern web technologies (React + Vercel).",
     tags: ["React", "TypeScript", "UI/UX"],
+    live: "https://ameem-uddin-ahmed.vercel.app/",
     github: "https://github.com/Ilmanizami",
     featured: true,
   },
@@ -190,11 +191,18 @@ const CreativePortfolio = () => {
                     </span>
                   ))}
                 </div>
-                {project.github && (
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
-                    <Github size={14} /> View on GitHub <ExternalLink size={12} />
-                  </a>
-                )}
+                <div className="flex items-center gap-3 flex-wrap">
+                  {(project as any).live && (
+                    <a href={(project as any).live} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-[hsl(150_65%_55%)] hover:text-[hsl(150_65%_65%)] transition-colors font-medium">
+                      <Globe size={14} /> Live Site <ExternalLink size={11} />
+                    </a>
+                  )}
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+                      <Github size={14} /> GitHub
+                    </a>
+                  )}
+                </div>
               </div>
             </ScrollReveal>
           ))}
