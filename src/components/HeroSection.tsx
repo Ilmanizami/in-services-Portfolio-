@@ -24,7 +24,7 @@ const HeroSection = () => {
         <div className="animate-fade-up perspective-container">
           <div className="relative inline-block">
             <div
-              className="relative mx-auto mb-8 overflow-hidden animate-pulse-glow shadow-[0_0_60px_hsl(42_75%_60%/0.35)] border-2 border-[hsl(42_75%_60%/0.5)] bg-background/50 rounded-full"
+              className="relative mx-auto mb-8 overflow-hidden animate-pulse-glow shadow-[0_0_60px_hsl(280_100%_58%/0.45)] border-2 border-primary/50 bg-background/50 rounded-full"
               style={{ width: "128px", height: "128px", aspectRatio: "1 / 1" }}
             >
               <img
@@ -38,8 +38,8 @@ const HeroSection = () => {
         </div>
 
         <div className="animate-fade-up-delay-1 mb-3">
-          <h1 className="font-serif-display text-6xl md:text-8xl font-bold tracking-wide text-gradient-gold leading-none">
-            IN-SERVICES
+          <h1 className="font-serif-display text-6xl md:text-8xl font-extrabold tracking-tight leading-none text-foreground">
+            IN-<span className="text-primary">SERVICES</span>
           </h1>
         </div>
 
@@ -50,7 +50,7 @@ const HeroSection = () => {
           <BadgeCheck className="w-5 h-5 md:w-6 md:h-6 text-primary" />
         </div>
 
-        <p className="animate-fade-up-delay-1 italic font-serif-display text-sm md:text-base text-[hsl(42_75%_65%)] mb-5">
+        <p className="animate-fade-up-delay-1 italic font-serif-display text-sm md:text-base text-primary/90 mb-5">
           "Where Design Meets Visual Creativity"
         </p>
 

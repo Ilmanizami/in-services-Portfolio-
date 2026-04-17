@@ -1,4 +1,4 @@
-import { ScrollReveal } from "@/hooks/useScrollAnimation">;
+import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import { Workflow, Mail, Linkedin, MessageCircle, CheckCircle2, Rocket, Clock } from "lucide-react";
 
 const highlights = [
