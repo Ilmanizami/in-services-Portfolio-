@@ -24,32 +24,42 @@ const HeroSection = () => {
         <div className="animate-fade-up perspective-container">
           <div className="relative inline-block">
             <div
-              className="w-32 h-32 rounded-full mx-auto mb-8 overflow-hidden animate-pulse-glow shadow-[0_0_60px_hsl(265_60%_55%/0.4)] border-2 border-primary/40 bg-background/50"
-              style={{ aspectRatio: "1/1" }}
+              className="relative mx-auto mb-8 overflow-hidden animate-pulse-glow shadow-[0_0_60px_hsl(42_75%_60%/0.35)] border-2 border-[hsl(42_75%_60%/0.5)] bg-background/50 rounded-full"
+              style={{ width: "128px", height: "128px", aspectRatio: "1 / 1" }}
             >
               <img
                 src={logo}
-                alt="IN Logo"
-                className="w-full h-full object-contain p-1"
+                alt="IN-SERVICES Logo"
+                className="absolute inset-0 w-full h-full p-2"
+                style={{ objectFit: "contain", aspectRatio: "1 / 1" }}
               />
             </div>
           </div>
         </div>
 
-        <div className="animate-fade-up-delay-1 flex items-center justify-center gap-2 mb-2">
-          <h1 className="font-display text-5xl md:text-7xl font-bold">
-            <span className="text-foreground">Ilma </span>
-            <span className="text-gradient">Nizami</span>
+        <div className="animate-fade-up-delay-1 mb-3">
+          <h1 className="font-serif-display text-6xl md:text-8xl font-bold tracking-wide text-gradient-gold leading-none">
+            IN-SERVICES
           </h1>
-          <BadgeCheck className="w-7 h-7 md:w-9 md:h-9 text-primary mt-2" />
         </div>
 
-        <p className="animate-fade-up-delay-1 text-xs md:text-sm text-primary font-medium mb-4">
-          BSCS-DUET'26 | Dawood University of Engineering & Technology
+        <div className="animate-fade-up-delay-1 flex items-center justify-center gap-2 mb-2">
+          <p className="font-display text-lg md:text-2xl text-foreground/90 font-light tracking-wide">
+            Ilma Nizami <span className="text-muted-foreground">|</span> <span className="text-primary">Creative Director</span>
+          </p>
+          <BadgeCheck className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+        </div>
+
+        <p className="animate-fade-up-delay-1 italic font-serif-display text-sm md:text-base text-[hsl(42_75%_65%)] mb-5">
+          "Where Design Meets Visual Creativity"
+        </p>
+
+        <p className="animate-fade-up-delay-2 text-xs md:text-sm text-primary font-medium mb-4">
+          BSCS-DUET'26 · AI & Cybersecurity Researcher (DLSCA) · Visual Animator @ MicroNex PAK · AI Artist @ RedverseAI
         </p>
 
         <p className="animate-fade-up-delay-2 text-base md:text-lg text-muted-foreground max-w-3xl mx-auto mb-2">
-          Visual Animator · AI Artist · Graphic Designer · Video Editor · Developer · Project Manager · Services Provider
+          Graphic Designer · Video Editor · Reel Animator · Developer · Project Manager · Premium Tools Provider
         </p>
         <p className="animate-fade-up-delay-2 text-sm text-muted-foreground max-w-2xl mx-auto mb-3">
           AI & Cybersecurity Researcher (DLSCA) | Junior AI & Compiler Dev | Intern @ Inventive Tech & MicroNex PAK
