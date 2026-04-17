@@ -3,7 +3,9 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import CreativePortfolio from "@/components/CreativePortfolio";
+import ToolCloud from "@/components/ToolCloud";
 import PremiumTools from "@/components/PremiumTools";
+import ProfessionalPulse from "@/components/ProfessionalPulse";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -21,7 +23,11 @@ const Index = () => {
       <div className="section-divider" />
       <CreativePortfolio />
       <div className="section-divider" />
+      <ToolCloud />
+      <div className="section-divider" />
       <PremiumTools />
+      <div className="section-divider" />
+      <ProfessionalPulse />
       <div className="section-divider" />
       <TestimonialsSection />
       <div className="section-divider" />
