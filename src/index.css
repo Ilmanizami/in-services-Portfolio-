@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap');
 
 @layer base {
   :root {
@@ -27,6 +27,9 @@
     --accent: 265 70% 65%;
     --accent-foreground: 0 0% 100%;
 
+    --gold: 42 75% 60%;
+    --emerald: 150 65% 45%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
@@ -37,8 +40,8 @@
     --radius: 0.75rem;
 
     --gradient-primary: linear-gradient(135deg, hsl(265 60% 55%), hsl(280 70% 65%));
+    --gradient-gold: linear-gradient(135deg, hsl(42 80% 65%), hsl(38 70% 50%));
     --gradient-card: linear-gradient(135deg, hsl(232 40% 12%), hsl(232 35% 8%));
-    --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(265 60% 55% / 0.06), transparent 40%);
     --shadow-glow: 0 0 40px hsl(265 60% 55% / 0.15);
     --shadow-card: 0 8px 32px hsl(232 47% 4% / 0.5);
 
@@ -69,9 +72,18 @@
 }
 
 @layer utilities {
+  .font-serif-display {
+    font-family: 'Playfair Display', serif;
+  }
+
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(265 60% 55%), hsl(280 70% 65%));
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(42 80% 65%), hsl(38 70% 50%));
   }
 
   .glass-card {
@@ -84,6 +96,8 @@
     box-shadow: var(--shadow-card);
     transform-style: preserve-3d;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .glass-card-3d:hover {
@@ -91,17 +105,9 @@
     box-shadow: 0 20px 60px hsl(265 60% 55% / 0.2), 0 0 40px hsl(265 60% 55% / 0.1);
   }
 
-  .glow-border {
-    @apply relative;
-  }
-  .glow-border::before {
-    content: '';
-    @apply absolute -inset-px rounded-xl opacity-0 transition-opacity duration-500;
-    background: var(--gradient-primary);
-    z-index: -1;
-  }
-  .glow-border:hover::before {
-    opacity: 1;
+  .glow-emerald {
+    box-shadow: 0 0 20px hsl(var(--emerald) / 0.3), 0 0 40px hsl(var(--emerald) / 0.15);
+    border: 1px solid hsl(var(--emerald) / 0.4);
   }
 
   .animate-float {
@@ -118,21 +124,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes fade-in-scale {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  @keyframes slide-in-left {
-    from { opacity: 0; transform: translateX(-60px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  @keyframes slide-in-right {
-    from { opacity: 0; transform: translateX(60px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
   @keyframes pulse-glow {
     0%, 100% { box-shadow: 0 0 20px hsl(265 60% 55% / 0.2); }
     50% { box-shadow: 0 0 40px hsl(265 60% 55% / 0.4), 0 0 80px hsl(265 60% 55% / 0.1); }
@@ -143,55 +134,21 @@
     to { transform: rotate(360deg); }
   }
 
-  .animate-fade-up {
-    animation: fade-up 0.6s ease-out forwards;
+  @keyframes orbit {
+    from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
   }
 
-  .animate-fade-up-delay-1 {
-    animation: fade-up 0.6s ease-out 0.1s forwards;
-    opacity: 0;
-  }
-  .animate-fade-up-delay-2 {
-    animation: fade-up 0.6s ease-out 0.2s forwards;
-    opacity: 0;
-  }
-  .animate-fade-up-delay-3 {
-    animation: fade-up 0.6s ease-out 0.3s forwards;
-    opacity: 0;
-  }
-  .animate-fade-up-delay-4 {
-    animation: fade-up 0.6s ease-out 0.4s forwards;
-    opacity: 0;
-  }
+  .animate-fade-up { animation: fade-up 0.6s ease-out forwards; }
+  .animate-fade-up-delay-1 { animation: fade-up 0.6s ease-out 0.1s forwards; opacity: 0; }
+  .animate-fade-up-delay-2 { animation: fade-up 0.6s ease-out 0.2s forwards; opacity: 0; }
+  .animate-fade-up-delay-3 { animation: fade-up 0.6s ease-out 0.3s forwards; opacity: 0; }
+  .animate-fade-up-delay-4 { animation: fade-up 0.6s ease-out 0.4s forwards; opacity: 0; }
 
-  .animate-scale-in {
-    animation: fade-in-scale 0.5s ease-out forwards;
-  }
+  .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+  .animate-rotate-slow { animation: rotate-slow 20s linear infinite; }
 
-  .animate-pulse-glow {
-    animation: pulse-glow 3s ease-in-out infinite;
-  }
-
-  .animate-rotate-slow {
-    animation: rotate-slow 20s linear infinite;
-  }
-
-  .perspective-container {
-    perspective: 1000px;
-  }
-
-  .tilt-card {
-    transform-style: preserve-3d;
-    transition: transform 0.3s ease;
-  }
-
-  .tilt-card:hover {
-    transform: rotateY(-8deg) rotateX(4deg);
-  }
-
-  .parallax-bg {
-    transform: translateZ(-1px) scale(2);
-  }
+  .perspective-container { perspective: 1000px; }
 
   .floating-orb {
     position: absolute;
@@ -204,5 +161,13 @@
   .section-divider {
     height: 1px;
     background: linear-gradient(90deg, transparent, hsl(265 60% 55% / 0.3), transparent);
+  }
+
+  .tool-icon-magnetic {
+    transition: transform 0.35s cubic-bezier(.2,.9,.3,1.4), box-shadow 0.3s ease;
+  }
+  .tool-icon-magnetic:hover {
+    transform: translateY(-8px) scale(1.15);
+    box-shadow: 0 12px 40px hsl(42 80% 65% / 0.35);
   }
 }

@@ -6,8 +6,7 @@ import { Menu, X } from "lucide-react";
 const navItems = [
   { label: "Home", path: "/" },
   { label: "Creative Works", id: "projects" },
-  { label: "Solutions & Web", path: "/services" },
-  { label: "Premium Tools", id: "tools" },
+  { label: "Tool Hub", id: "tools" },
   { label: "Testimonials", id: "testimonials" },
   { label: "Contact", id: "contact" },
 ];
@@ -44,11 +43,21 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <Link to="/" className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-full overflow-hidden border border-primary/40 shadow-[0_0_16px_hsl(265_60%_55%/0.3)] flex-shrink-0" style={{ aspectRatio: "1/1" }}>
-            <img src={logo} alt="IN Logo" className="w-full h-full object-contain bg-background/80" />
+        <Link to="/" className="flex items-center gap-3 shrink-0 min-w-0">
+          <div
+            className="relative shrink-0 rounded-full overflow-hidden border border-[hsl(42_75%_60%/0.4)] shadow-[0_0_18px_hsl(42_75%_60%/0.25)] bg-background/80"
+            style={{ width: "40px", height: "40px", aspectRatio: "1 / 1", flex: "0 0 40px" }}
+          >
+            <img
+              src={logo}
+              alt="IN-SERVICES Logo"
+              className="absolute inset-0 w-full h-full"
+              style={{ objectFit: "contain", aspectRatio: "1 / 1" }}
+            />
           </div>
-          <span className="font-display font-bold text-lg text-foreground">IN Services</span>
+          <span className="font-serif-display font-bold text-lg md:text-xl text-gradient-gold tracking-wide whitespace-nowrap">
+            IN-SERVICES
+          </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-1">
@@ -75,7 +84,7 @@ const Navbar = () => {
           )}
         </div>
 
-        <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
+        <button className="md:hidden text-foreground" onClick={() => setOpen(!open)} aria-label="Toggle menu">
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
