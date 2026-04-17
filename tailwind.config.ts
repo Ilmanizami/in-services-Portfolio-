@@ -14,7 +14,8 @@ export default {
     },
     fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        display: ['Space Grotesk', 'sans-serif'],
+        display: ['Montserrat', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
       },
       extend: {
       colors: {

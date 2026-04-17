@@ -2,9 +2,10 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import ExperienceSection from "@/components/ExperienceSection";
+import EngineeringLab from "@/components/EngineeringLab";
 import CreativePortfolio from "@/components/CreativePortfolio";
-import ToolCloud from "@/components/ToolCloud";
 import PremiumTools from "@/components/PremiumTools";
+import ProjectManagement from "@/components/ProjectManagement";
 import ProfessionalPulse from "@/components/ProfessionalPulse";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
@@ -21,11 +22,13 @@ const Index = () => {
       <div className="section-divider" />
       <ExperienceSection />
       <div className="section-divider" />
+      <EngineeringLab />
+      <div className="section-divider" />
       <CreativePortfolio />
       <div className="section-divider" />
-      <ToolCloud />
-      <div className="section-divider" />
       <PremiumTools />
+      <div className="section-divider" />
+      <ProjectManagement />
       <div className="section-divider" />
       <ProfessionalPulse />
       <div className="section-divider" />

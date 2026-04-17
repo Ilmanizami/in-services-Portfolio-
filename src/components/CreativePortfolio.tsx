@@ -167,10 +167,10 @@ const CreativePortfolio = () => {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 perspective-container">
+        <div className="masonry perspective-container">
           {filtered.map((project, i) => (
             <ScrollReveal key={project.title + project.client} delay={i * 60} direction={i % 2 === 0 ? "up" : "scale"}>
-              <div className={`glass-card-3d p-6 flex flex-col h-full group relative ${project.featured ? "border-primary/30" : ""}`}>
+              <div className={`glass-card-3d p-6 flex flex-col group relative ${project.featured ? "border-primary/40" : ""}`}>
                 {project.featured && (
                   <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-primary/20 border border-primary/30 text-[10px] font-medium text-primary flex items-center gap-1">
                     <BadgeCheck size={10} /> Featured
