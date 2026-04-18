@@ -1,5 +1,5 @@
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
-import { BadgeCheck, Brain, Palette, Search, GraduationCap, Zap } from "lucide-react";
+import { BadgeCheck, Brain, Palette, Search, GraduationCap, Zap, MessageCircle } from "lucide-react";
 
 type Bundle = {
   title: string;
@@ -90,17 +90,20 @@ const PremiumTools = () => {
                     <p className="text-xs text-muted-foreground">{b.tagline}</p>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-2 mb-4 flex-1">
+
+                {/* Oval tool chips */}
+                <div className="flex flex-wrap gap-2 mb-5 flex-1">
                   {b.tools.map((t) => (
                     <span
                       key={t}
-                      className="text-[11px] px-2.5 py-1 rounded-full bg-primary/10 text-foreground/90 border border-primary/30 hover:border-primary/60 transition-colors"
+                      className="text-[11px] px-3 py-1.5 rounded-full bg-background/40 text-foreground/90 border border-primary/50 shadow-[0_0_12px_hsl(280_100%_58%/0.15)] hover:border-primary hover:shadow-[0_0_18px_hsl(280_100%_58%/0.45)] hover:bg-primary/10 transition-all"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
-                <div className="pt-3 border-t border-border/40 flex items-center justify-between">
+
+                <div className="pt-4 border-t border-border/40 flex items-center justify-between gap-3">
                   <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
                     <BadgeCheck size={12} /> Verified Service
                   </span>
@@ -108,9 +111,9 @@ const PremiumTools = () => {
                     href="https://wa.me/923243564150"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] font-medium text-primary hover:text-accent transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary text-primary-foreground text-[11px] font-semibold hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_18px_hsl(280_100%_58%/0.45)]"
                   >
-                    <Zap size={12} /> Activate
+                    <MessageCircle size={12} /> WhatsApp to Activate
                   </a>
                 </div>
               </div>
