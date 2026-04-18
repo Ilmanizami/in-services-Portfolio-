@@ -57,8 +57,12 @@ const showcase = [
   },
   {
     icon: Workflow,
-    title: "Specialized",
-    items: ["Data Entry — Himansh Professional Pulse"],
+    title: "Specialized / Data",
+    items: [
+      "Himansh — Professional Data Entry",
+      "Family Tree — Mustafa",
+      "Custom Wedding Envelopes",
+    ],
   },
 ];
 

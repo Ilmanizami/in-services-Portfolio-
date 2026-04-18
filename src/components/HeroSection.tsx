@@ -1,6 +1,10 @@
 import heroBg from "@/assets/hero-bg.jpg";
-import logo from "@/assets/logo.png";
 import { ArrowDown, Github, Linkedin, Mail, Phone, Calendar, BadgeCheck } from "lucide-react";
+
+const scrollToId = (id: string) => (e: React.MouseEvent) => {
+  e.preventDefault();
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+};
 
 const HeroSection = () => {
   return (
@@ -20,23 +24,7 @@ const HeroSection = () => {
         <div className="absolute inset-16 rounded-full border border-primary/10" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        <div className="animate-fade-up perspective-container">
-          <div className="relative inline-block">
-            <div
-              className="relative mx-auto mb-8 overflow-hidden animate-pulse-glow shadow-[0_0_60px_hsl(280_100%_58%/0.45)] border-2 border-primary/50 bg-background/50 rounded-full"
-              style={{ width: "128px", height: "128px", aspectRatio: "1 / 1" }}
-            >
-              <img
-                src={logo}
-                alt="IN-SERVICES Logo"
-                className="absolute inset-0 w-full h-full p-2"
-                style={{ objectFit: "contain", aspectRatio: "1 / 1" }}
-              />
-            </div>
-          </div>
-        </div>
-
+      <div className="relative z-10 container mx-auto px-4 text-center pt-24">
         <div className="animate-fade-up-delay-1 mb-3">
           <h1 className="font-serif-display text-6xl md:text-8xl font-extrabold tracking-tight leading-none text-foreground">
             IN-<span className="text-primary">SERVICES</span>
@@ -44,8 +32,8 @@ const HeroSection = () => {
         </div>
 
         <div className="animate-fade-up-delay-1 flex items-center justify-center gap-2 mb-2">
-          <p className="font-display text-lg md:text-2xl text-foreground/90 font-light tracking-wide">
-            Ilma Nizami <span className="text-muted-foreground">|</span> <span className="text-primary">Creative Director</span>
+          <p className="font-display text-lg md:text-2xl text-white font-light tracking-wide">
+            Ilma Nizami <span className="text-white/60">|</span> <span className="text-white">Creative Director</span>
           </p>
           <BadgeCheck className="w-5 h-5 md:w-6 md:h-6 text-primary" />
         </div>
@@ -54,9 +42,13 @@ const HeroSection = () => {
           "Where Design Meets Visual Creativity"
         </p>
 
-        <p className="animate-fade-up-delay-2 text-xs md:text-sm text-primary font-medium mb-4">
+        <a
+          href="#engineering-lab"
+          onClick={scrollToId("engineering-lab")}
+          className="animate-fade-up-delay-2 block text-xs md:text-sm text-white font-medium mb-4 hover:text-primary transition-colors cursor-pointer"
+        >
           BSCS-DUET'26 · AI & Cybersecurity Researcher (DLSCA) · Visual Animator @ MicroNex PAK · AI Artist @ RedverseAI
-        </p>
+        </a>
 
         <p className="animate-fade-up-delay-2 text-base md:text-lg text-muted-foreground max-w-3xl mx-auto mb-2">
           Graphic Designer · Video Editor · Reel Animator · Developer · Project Manager · Premium Tools Provider
