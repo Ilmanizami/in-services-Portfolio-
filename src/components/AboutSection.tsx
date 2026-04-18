@@ -38,7 +38,7 @@ const AboutSection = () => {
           </ScrollReveal>
           <ScrollReveal delay={300}>
             <p className="text-muted-foreground text-center text-sm">
-              Through <span className="text-foreground font-medium">Phinnovate Tech</span>, I offer digital solutions across diverse niches including design, development, branding, video editing, and academic tutoring. My mission is to grow into a high-impact AI Engineer while delivering creative excellence.
+              Through <span className="text-foreground font-medium">IN-SERVICES</span>, I offer digital solutions across diverse niches including design, development, branding, video editing, and academic tutoring. My mission is to grow into a high-impact AI Engineer while delivering creative excellence.
             </p>
           </ScrollReveal>
         </div>
