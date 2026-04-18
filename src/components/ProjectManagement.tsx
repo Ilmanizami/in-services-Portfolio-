@@ -43,7 +43,7 @@ const showcase = [
   {
     icon: Cpu,
     title: "Tech / Research",
-    items: ["MindStream AI", "Optigraph", "Spotify Predictor", "Scientific Calculator"],
+    items: ["MindStream AI", "Optigraph", "Spotify Predictor", "Scientific Calculator", "Himansh — Data Entry"],
   },
   {
     icon: FileText,
