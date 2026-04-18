@@ -4,40 +4,40 @@ import { ScrollReveal } from "@/hooks/useScrollAnimation";
 
 const testimonials = [
   {
-    name: "Ayaz Hussain",
-    role: "2D Character Client",
+    name: "Himansh",
+    role: "Professional Pulse · Data Entry Client",
     rating: 5,
-    text: "Mera project kharab ho chuka tha, lekin inhone recovery ke baad impeccable quality 2D characters banaye. Quality is 10/10.",
+    text: "Highly professional data entry and precise execution. Delivered before the deadline.",
+  },
+  {
+    name: "MindStream AI Client",
+    role: "Technical · AI Implementation",
+    rating: 5,
+    text: "A game-changing AI implementation that optimized our entire cognitive workflow.",
+  },
+  {
+    name: "Ayaz Hussain",
+    role: "2D Characters Client",
+    rating: 5,
+    text: "Outstanding recovery work; the quality is unmatched.",
   },
   {
     name: "Ali",
     role: "3D Animation Client",
     rating: 5,
-    text: "Exceptional 3D Blender animation work. Professional and prompt delivery — the cinematic logo reveal exceeded my expectations.",
+    text: "Cinematic precision and excellent motion sequencing.",
   },
   {
     name: "Tanzila Rohail",
     role: "Influencer · CapCut Pro Client",
     rating: 5,
-    text: "Highly reliable service for professional-grade editing tools and support. Made my content production seamless.",
+    text: "Perfect execution for high-impact social media content.",
   },
   {
     name: "Sarah K.",
     role: "Stationery / Wedding Client",
     rating: 5,
-    text: "The customized wedding envelopes and animated cards made our event truly royal. Every detail was perfect — emerald and gold finish was exactly what we envisioned!",
-  },
-  {
-    name: "Dr. Hamza R.",
-    role: "Technical Client · MindStream AI",
-    rating: 5,
-    text: "The MindStream AI prototype was delivered with research-grade precision — clean architecture, well-documented models, and a polished UI. Truly the rare combination of engineering depth and design taste.",
-  },
-  {
-    name: "Ayesha Rehman",
-    role: "Wedding Client",
-    rating: 5,
-    text: "The animated wedding invite was a huge hit! Elegant, creative, and saved us so much time with digital distribution.",
+    text: "Animated wedding cards added a royal, premium touch!",
   },
 ];
 
