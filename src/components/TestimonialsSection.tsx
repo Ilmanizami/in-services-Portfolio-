@@ -22,34 +22,22 @@ const testimonials = [
     text: "Highly reliable service for professional-grade editing tools and support. Made my content production seamless.",
   },
   {
-    name: "Sarah Khalid",
-    role: "Wedding Client",
+    name: "Sarah K.",
+    role: "Stationery / Wedding Client",
     rating: 5,
     text: "The customized wedding envelopes and animated cards made our event truly royal. Every detail was perfect — emerald and gold finish was exactly what we envisioned!",
+  },
+  {
+    name: "Dr. Hamza R.",
+    role: "Technical Client · MindStream AI",
+    rating: 5,
+    text: "The MindStream AI prototype was delivered with research-grade precision — clean architecture, well-documented models, and a polished UI. Truly the rare combination of engineering depth and design taste.",
   },
   {
     name: "Ayesha Rehman",
     role: "Wedding Client",
     rating: 5,
     text: "The animated wedding invite was a huge hit! Elegant, creative, and saved us so much time with digital distribution.",
-  },
-  {
-    name: "Khadeejah Nizam",
-    role: "FYP Student — DUET",
-    rating: 5,
-    text: "Ilma analyzed my FYP report and designed a stunning panaflex from scratch — delivered right to my location. Highly professional service.",
-  },
-  {
-    name: "Ahmed Qadri",
-    role: "Software House — Retainer",
-    rating: 5,
-    text: "Ongoing creative partner for our software house branding, thumbnails, and brochures. Consistently high quality and reliable turnaround.",
-  },
-  {
-    name: "Pizza Planet",
-    role: "Brand Identity Client",
-    rating: 5,
-    text: "Complete brand overhaul — logo, digital menus, banners, and QR integration. Our customers love the new look!",
   },
 ];
 
@@ -61,12 +49,20 @@ const TestimonialsSection = () => {
     if (paused) return;
     const timer = setInterval(() => {
       setCurrent((c) => (c + 1) % testimonials.length);
-    }, 4000);
+    }, 5000);
     return () => clearInterval(timer);
   }, [paused]);
 
   const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
   const next = () => setCurrent((c) => (c + 1) % testimonials.length);
+
+  const getOffset = (i: number) => {
+    const len = testimonials.length;
+    let diff = i - current;
+    if (diff > len / 2) diff -= len;
+    if (diff < -len / 2) diff += len;
+    return diff;
+  };
 
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
@@ -74,77 +70,104 @@ const TestimonialsSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-4">
-            Client <span className="text-gradient">Stories</span>
+          <h2 className="font-display text-3xl md:text-5xl font-extrabold text-center mb-3 tracking-tight">
+            Client <span className="text-gradient">Reviews</span>
           </h2>
-          <p className="text-muted-foreground text-center max-w-xl mx-auto mb-16">
-            Trusted by 80+ clients locally & internationally. Here's what they say.
+          <p className="text-muted-foreground text-center max-w-xl mx-auto mb-16 text-sm md:text-base">
+            Trusted by 80+ clients locally & internationally — across creative, technical, and academic projects.
           </p>
         </ScrollReveal>
 
-        {/* Featured carousel */}
+        {/* 3D perspective slider */}
         <ScrollReveal delay={100}>
           <div
-            className="max-w-2xl mx-auto mb-16"
+            className="relative max-w-4xl mx-auto h-[420px] md:h-[380px] flex items-center justify-center"
+            style={{ perspective: "1400px" }}
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div className="glass-card-3d p-8 md:p-10 text-center relative">
-              <Quote className="w-10 h-10 text-primary/20 mx-auto mb-4" />
-              <p className="text-base md:text-lg text-foreground/90 leading-relaxed mb-6 min-h-[80px]">
-                "{testimonials[current].text}"
-              </p>
-              <div className="flex justify-center gap-0.5 mb-3">
-                {Array.from({ length: 5 }).map((_, s) => (
-                  <Star
-                    key={s}
-                    size={16}
-                    className={s < testimonials[current].rating ? "fill-primary text-primary" : "text-muted-foreground/30"}
-                  />
-                ))}
-              </div>
-              <p className="font-display font-semibold text-foreground">{testimonials[current].name}</p>
-              <p className="text-xs text-primary/80">{testimonials[current].role}</p>
+            {testimonials.map((t, i) => {
+              const offset = getOffset(i);
+              const abs = Math.abs(offset);
+              const isActive = offset === 0;
+              const visible = abs <= 2;
 
-              <div className="flex items-center justify-center gap-4 mt-6">
-                <button onClick={prev} className="p-2 rounded-full glass-card hover:bg-primary/10 transition-colors">
-                  <ChevronLeft size={18} className="text-muted-foreground" />
-                </button>
-                <div className="flex gap-1.5">
-                  {testimonials.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrent(i)}
-                      className={`w-2 h-2 rounded-full transition-all ${i === current ? "bg-primary w-6" : "bg-muted-foreground/30"}`}
-                    />
-                  ))}
+              const translateX = offset * 180;
+              const translateZ = -abs * 220;
+              const rotateY = offset * -22;
+              const opacity = visible ? (isActive ? 1 : 0.55 - abs * 0.15) : 0;
+              const zIndex = 10 - abs;
+
+              return (
+                <div
+                  key={t.name}
+                  className="absolute w-[88%] sm:w-[460px] transition-all duration-700 ease-out"
+                  style={{
+                    transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`,
+                    opacity,
+                    zIndex,
+                    pointerEvents: isActive ? "auto" : "none",
+                    transformStyle: "preserve-3d",
+                  }}
+                >
+                  <div
+                    className={`glass-card p-7 md:p-9 text-center border ${
+                      isActive
+                        ? "border-primary/60 shadow-[0_0_40px_hsl(280_100%_58%/0.45)]"
+                        : "border-border/40"
+                    }`}
+                  >
+                    <Quote className="w-9 h-9 text-primary/30 mx-auto mb-4" />
+                    <p className="text-sm md:text-base text-foreground/90 leading-relaxed mb-5 min-h-[96px]">
+                      "{t.text}"
+                    </p>
+                    <div className="flex justify-center gap-0.5 mb-3">
+                      {Array.from({ length: 5 }).map((_, s) => (
+                        <Star
+                          key={s}
+                          size={15}
+                          className={s < t.rating ? "fill-primary text-primary" : "text-muted-foreground/30"}
+                        />
+                      ))}
+                    </div>
+                    <p className="font-display font-semibold text-foreground">{t.name}</p>
+                    <p className="text-xs text-primary/80">{t.role}</p>
+                  </div>
                 </div>
-                <button onClick={next} className="p-2 rounded-full glass-card hover:bg-primary/10 transition-colors">
-                  <ChevronRight size={18} className="text-muted-foreground" />
-                </button>
-              </div>
+              );
+            })}
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button
+              onClick={prev}
+              aria-label="Previous review"
+              className="p-2.5 rounded-full glass-card border border-primary/40 hover:bg-primary/10 hover:border-primary transition-all"
+            >
+              <ChevronLeft size={18} className="text-primary" />
+            </button>
+            <div className="flex gap-1.5">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  aria-label={`Go to review ${i + 1}`}
+                  className={`h-2 rounded-full transition-all ${
+                    i === current ? "bg-primary w-8 shadow-[0_0_10px_hsl(280_100%_58%/0.6)]" : "bg-muted-foreground/30 w-2"
+                  }`}
+                />
+              ))}
             </div>
+            <button
+              onClick={next}
+              aria-label="Next review"
+              className="p-2.5 rounded-full glass-card border border-primary/40 hover:bg-primary/10 hover:border-primary transition-all"
+            >
+              <ChevronRight size={18} className="text-primary" />
+            </button>
           </div>
         </ScrollReveal>
-
-        {/* Mini grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 perspective-container">
-          {testimonials.slice(0, 4).map((t, i) => (
-            <ScrollReveal key={t.name} delay={i * 80}>
-              <div className="glass-card-3d p-5 h-full flex flex-col hover:border-primary/50 group">
-                <Quote className="w-5 h-5 text-primary/30 mb-2" />
-                <p className="text-xs text-muted-foreground flex-1 mb-3 leading-relaxed">"{t.text}"</p>
-                <div className="flex gap-0.5 mb-2">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Star key={s} size={10} className={s < t.rating ? "fill-primary text-primary" : "text-muted-foreground/30"} />
-                  ))}
-                </div>
-                <p className="text-sm font-semibold text-foreground">{t.name}</p>
-                <p className="text-[10px] text-primary/80">{t.role}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
       </div>
     </section>
   );
