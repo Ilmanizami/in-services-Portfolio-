@@ -15,7 +15,7 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 
 const Index = () => {
   return (
-    <div className="min-h-screen digital-aura relative">
+    <div className="min-h-screen digital-aura relative w-full max-w-[100vw] overflow-x-hidden">
       <AnimatedBackground />
       <Navbar />
       <HeroSection />

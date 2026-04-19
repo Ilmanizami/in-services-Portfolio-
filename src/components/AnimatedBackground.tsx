@@ -40,7 +40,7 @@ const AnimatedBackground = () => {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden max-w-[100vw]"
       style={{ perspective: "1000px" }}
     >
       {/* Wireframe grid */}
