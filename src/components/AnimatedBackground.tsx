@@ -58,10 +58,12 @@ const AnimatedBackground = () => {
       {/* Floating icons */}
       {ICONS.map((it, idx) => {
         const Icon = it.Icon;
+        const leftNum = parseFloat(it.left);
+        const hideOnMobile = leftNum > 70;
         return (
           <div
             key={idx}
-            className="absolute"
+            className={`absolute ${hideOnMobile ? "hidden md:block" : ""}`}
             style={{
               top: it.top,
               left: it.left,
