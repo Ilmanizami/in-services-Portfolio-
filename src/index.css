@@ -16,7 +16,8 @@
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 280 100% 58%;        /* #B026FF neon purple */
+    --primary: 280 100% 70%;        /* brighter neon purple — pops against charcoal */
+    --primary-glow: 282 100% 80%;   /* luminous accent for inner glow */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 12%;
@@ -151,6 +152,38 @@
 
   .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
   .animate-rotate-slow { animation: rotate-slow 20s linear infinite; }
+
+  /* Digital Aura — slow swirling charcoal + neon-purple gradient */
+  @keyframes auraDrift {
+    0%   { background-position: 0% 50%, 100% 50%, 50% 0%; }
+    50%  { background-position: 100% 50%, 0% 50%, 50% 100%; }
+    100% { background-position: 0% 50%, 100% 50%, 50% 0%; }
+  }
+  .digital-aura {
+    background-color: hsl(0 0% 7%);
+    background-image:
+      radial-gradient(60% 50% at 20% 30%, hsl(280 100% 58% / 0.18), transparent 70%),
+      radial-gradient(55% 55% at 80% 70%, hsl(282 100% 70% / 0.14), transparent 70%),
+      radial-gradient(50% 60% at 50% 100%, hsl(280 100% 50% / 0.12), transparent 75%);
+    background-size: 200% 200%, 200% 200%, 200% 200%;
+    animation: auraDrift 28s ease-in-out infinite;
+  }
+
+  /* Oval card glow — brighter, more 3D */
+  .oval-glow {
+    box-shadow:
+      0 0 0 1px hsl(280 100% 70% / 0.55),
+      0 0 18px hsl(280 100% 70% / 0.35),
+      0 8px 28px hsl(280 100% 50% / 0.25),
+      inset 0 0 12px hsl(282 100% 80% / 0.08);
+  }
+  .oval-glow:hover {
+    box-shadow:
+      0 0 0 1px hsl(282 100% 80% / 0.9),
+      0 0 26px hsl(280 100% 70% / 0.65),
+      0 12px 36px hsl(280 100% 60% / 0.45),
+      inset 0 0 16px hsl(282 100% 80% / 0.18);
+  }
 
   .perspective-container { perspective: 1000px; }
 
