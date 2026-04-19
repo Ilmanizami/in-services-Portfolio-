@@ -99,7 +99,7 @@ const PremiumTools = () => {
                   {b.tools.map((t) => (
                     <span
                       key={t}
-                      className="inline-flex items-center justify-center text-[11px] leading-none px-3.5 h-7 rounded-full whitespace-nowrap bg-background/40 text-foreground/90 border border-primary/50 shadow-[0_0_12px_hsl(280_100%_58%/0.15)] hover:border-primary hover:shadow-[0_0_18px_hsl(280_100%_58%/0.5)] hover:bg-primary/10 hover:scale-[1.04] transition-all duration-300"
+                      className="oval-glow inline-flex items-center justify-center text-[11px] leading-none px-3.5 h-7 rounded-full whitespace-nowrap bg-background/40 backdrop-blur-md text-foreground/95 hover:bg-primary/15 hover:scale-[1.05] transition-all duration-300"
                     >
                       {t}
                     </span>
