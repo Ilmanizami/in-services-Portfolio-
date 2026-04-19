@@ -1,17 +1,46 @@
-import { Code, Palette, Video, Users, Briefcase, Monitor, Shield, Brain, Wrench, GraduationCap } from "lucide-react";
+import { Code, Palette, Video, Briefcase, Brain, Wrench, GraduationCap, Box, Film, Image as ImageIcon, FileText, Layout, Heart, Cpu } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
 
-const skills = [
-  { icon: Palette, label: "Graphic Design" },
-  { icon: Video, label: "Video Editing" },
-  { icon: Monitor, label: "Reel Animation" },
-  { icon: Code, label: "Development" },
-  { icon: Briefcase, label: "Project Management" },
-  { icon: Brain, label: "AI & ML" },
-  { icon: Shield, label: "Cybersecurity" },
-  { icon: Wrench, label: "Tools Provider" },
-  { icon: Users, label: "Client Relations" },
-  { icon: GraduationCap, label: "Tutoring" },
+type ServiceGroup = {
+  title: string;
+  items: { icon: React.ElementType; label: string }[];
+};
+
+const serviceGroups: ServiceGroup[] = [
+  {
+    title: "3D & Motion",
+    items: [
+      { icon: Box, label: "3D Art" },
+      { icon: Cpu, label: "3D Modeling" },
+      { icon: Film, label: "2D / 3D Animation" },
+    ],
+  },
+  {
+    title: "Design Suite",
+    items: [
+      { icon: Palette, label: "Graphic Design" },
+      { icon: ImageIcon, label: "Thumbnail Creation" },
+      { icon: Heart, label: "Wedding Cards & Stationery" },
+    ],
+  },
+  {
+    title: "Dev & Ops",
+    items: [
+      { icon: Layout, label: "Portfolio Web Dev" },
+      { icon: FileText, label: "CV / Resume Design" },
+      { icon: Briefcase, label: "Project Management" },
+      { icon: Wrench, label: "Tool Services" },
+    ],
+  },
+  {
+    title: "AI · Security · Tutoring",
+    items: [
+      { icon: Brain, label: "AI & ML" },
+      { icon: Code, label: "Development" },
+      { icon: Video, label: "Video Editing" },
+      { icon: GraduationCap, label: "Tutoring" },
+    ],
+  },
 ];
 
 const AboutSection = () => {
@@ -43,12 +72,21 @@ const AboutSection = () => {
           </ScrollReveal>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-16 perspective-container">
-          {skills.map((skill, i) => (
-            <ScrollReveal key={skill.label} delay={i * 60}>
-              <div className="glass-card-3d p-5 text-center hover:border-primary/50 group">
-                <skill.icon className="w-7 h-7 mx-auto mb-3 text-primary group-hover:scale-110 transition-transform" />
-                <p className="text-xs font-medium text-foreground">{skill.label}</p>
+        <div className="space-y-6 mb-16 perspective-container">
+          {serviceGroups.map((g, gi) => (
+            <ScrollReveal key={g.title} delay={gi * 80}>
+              <div>
+                <h3 className="font-display text-sm md:text-base font-bold text-foreground/90 mb-3 text-center md:text-left">
+                  <span className="text-gradient">{g.title}</span>
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {g.items.map((s) => (
+                    <div key={s.label} className="glass-card-3d p-5 text-center hover:border-primary/50 group oval-glow rounded-xl">
+                      <s.icon className="w-7 h-7 mx-auto mb-3 text-primary group-hover:scale-110 transition-transform" />
+                      <p className="text-xs font-medium text-foreground">{s.label}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </ScrollReveal>
           ))}
