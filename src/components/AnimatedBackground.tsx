@@ -40,7 +40,7 @@ const AnimatedBackground = () => {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden max-w-[100vw]"
       style={{ perspective: "1000px" }}
     >
       {/* Wireframe grid */}
@@ -58,10 +58,12 @@ const AnimatedBackground = () => {
       {/* Floating icons */}
       {ICONS.map((it, idx) => {
         const Icon = it.Icon;
+        const leftNum = parseFloat(it.left);
+        const hideOnMobile = leftNum > 70;
         return (
           <div
             key={idx}
-            className="absolute"
+            className={`absolute ${hideOnMobile ? "hidden md:block" : ""}`}
             style={{
               top: it.top,
               left: it.left,
