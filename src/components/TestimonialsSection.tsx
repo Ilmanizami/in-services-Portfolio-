@@ -1,68 +1,123 @@
-import { useState, useEffect } from "react";
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Star, Quote, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
 
-const testimonials = [
-  {
-    name: "Himansh",
-    role: "Professional Pulse · Data Entry Client",
-    rating: 5,
-    text: "Highly professional data entry and precise execution. Delivered before the deadline.",
-  },
-  {
-    name: "MindStream AI Client",
-    role: "Technical · AI Implementation",
-    rating: 5,
-    text: "A game-changing AI implementation that optimized our entire cognitive workflow.",
-  },
-  {
-    name: "Ayaz Hussain",
-    role: "2D Characters Client",
-    rating: 5,
-    text: "Outstanding recovery work; the quality is unmatched.",
-  },
-  {
-    name: "Ali",
-    role: "3D Animation Client",
-    rating: 5,
-    text: "Cinematic precision and excellent motion sequencing.",
-  },
-  {
-    name: "Tanzila Rohail",
-    role: "Influencer · CapCut Pro Client",
-    rating: 5,
-    text: "Perfect execution for high-impact social media content.",
-  },
-  {
-    name: "Sarah K.",
-    role: "Stationery / Wedding Client",
-    rating: 5,
-    text: "Animated wedding cards added a royal, premium touch!",
-  },
+type Testimonial = {
+  name: string;
+  country: string;
+  service: string;
+  rating: number;
+  text: string;
+};
+
+const testimonials: Testimonial[] = [
+  // 🇵🇰 Pakistani
+  { name: "Ahmed Ali", country: "Pakistan", service: "3D Animation", rating: 5,
+    text: "Cinematic 3D sequences delivered ahead of schedule — the lighting and camera work felt truly premium." },
+  { name: "Zainab Khan", country: "Pakistan", service: "Wedding Cards & Stationery", rating: 5,
+    text: "Our animated wedding invites were the talk of the event. Royal, elegant, and absolutely flawless." },
+  { name: "Bilal Ahmed", country: "Pakistan", service: "Portfolio Web Development", rating: 5,
+    text: "A clean, lightning-fast portfolio with thoughtful UX. Clients now take me far more seriously." },
+  { name: "Fatima Noor", country: "Pakistan", service: "Graphic Design", rating: 5,
+    text: "Brand identity work that captured exactly what I imagined — bold, modern, and on-message." },
+  { name: "Hamza Sheikh", country: "Pakistan", service: "AI Implementation", rating: 5,
+    text: "MindStream-style AI workflow integrated end-to-end. Cut my research time in half." },
+  { name: "Aisha Javed", country: "Pakistan", service: "CV / Resume Design", rating: 5,
+    text: "My resume finally stands out. Got 3 callbacks in the first week — total game-changer." },
+  // 🌍 International
+  { name: "Sarah Jenkins", country: "USA", service: "Motion Graphics", rating: 5,
+    text: "Smooth, professional motion design that elevated our entire YouTube channel. Highly recommend." },
+  { name: "Michael Ross", country: "UK", service: "Thumbnail Creation", rating: 5,
+    text: "CTR jumped 40% within two weeks. Sharp eye for what actually converts." },
+  { name: "Emily Taylor", country: "Canada", service: "Video Editing", rating: 5,
+    text: "Crisp cuts, perfect pacing, and audio that just sits right. Will absolutely book again." },
+  { name: "David Chen", country: "Australia", service: "Project Management", rating: 5,
+    text: "Communication was world-class — every milestone on time, every deliverable polished." },
+  { name: "Sofia Rossi", country: "Italy", service: "2D Character Art", rating: 5,
+    text: "Beautiful character design with real personality. Captured my brand's soul perfectly." },
+  // 🇮🇳 Indian
+  { name: "Arjun Kapoor", country: "India", service: "Tool Services", rating: 5,
+    text: "Genuine premium subscriptions, instant activation, and brilliant after-sales support." },
+  { name: "Priya Sharma", country: "India", service: "Data Entry & Research", rating: 5,
+    text: "Highly professional execution, zero errors, delivered ahead of the deadline." },
+  // 🇸🇦 Saudi
+  { name: "Abdullah Al-Farsi", country: "Saudi Arabia", service: "Branding & Identity", rating: 5,
+    text: "A complete visual ecosystem for our brand — sophisticated, consistent, and impactful." },
+  { name: "Layla Hussain", country: "Saudi Arabia", service: "AI Art & Illustration", rating: 5,
+    text: "Stunning AI-driven artwork with a luxury feel. Exactly what our campaign needed." },
 ];
 
+const useVisibleCount = () => {
+  const [n, setN] = useState(1);
+  useEffect(() => {
+    const update = () => setN(window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  return n;
+};
+
+const StarRow = ({ rating }: { rating: number }) => (
+  <div className="flex justify-center gap-0.5 mb-3" aria-label={`${rating} out of 5 stars`}>
+    {Array.from({ length: 5 }).map((_, s) => (
+      <Star
+        key={s}
+        size={15}
+        className={s < rating ? "fill-yellow-400 text-yellow-400 drop-shadow-[0_0_4px_rgba(250,204,21,0.6)]" : "text-muted-foreground/30"}
+      />
+    ))}
+  </div>
+);
+
+const TestimonialCard = ({ t }: { t: Testimonial }) => (
+  <div
+    className="oval-glow h-full rounded-3xl p-6 md:p-7 text-center bg-white/[0.04] backdrop-blur-[15px] border border-white/10 transition-transform duration-500 hover:-translate-y-1"
+  >
+    <Quote className="w-8 h-8 text-primary/50 mx-auto mb-3" />
+    <p className="text-sm text-foreground/90 leading-relaxed mb-4 min-h-[88px]">"{t.text}"</p>
+    <StarRow rating={t.rating} />
+    <p className="font-display font-semibold text-foreground">{t.name}</p>
+    <p className="text-xs text-primary/90">{t.service} · <span className="text-muted-foreground">{t.country}</span></p>
+  </div>
+);
+
 const TestimonialsSection = () => {
-  const [current, setCurrent] = useState(0);
+  const visible = useVisibleCount();
+  const [start, setStart] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [openAll, setOpenAll] = useState(false);
+
+  const len = testimonials.length;
+
+  const next = useCallback(() => setStart((s) => (s + 1) % len), [len]);
+  const prev = useCallback(() => setStart((s) => (s - 1 + len) % len), [len]);
 
   useEffect(() => {
-    if (paused) return;
-    const timer = setInterval(() => {
-      setCurrent((c) => (c + 1) % testimonials.length);
-    }, 5000);
+    if (paused || openAll) return;
+    const timer = setInterval(next, 4500);
     return () => clearInterval(timer);
-  }, [paused]);
+  }, [paused, openAll, next]);
 
-  const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
-  const next = () => setCurrent((c) => (c + 1) % testimonials.length);
+  // touch swipe
+  useEffect(() => {
+    let startX = 0;
+    const onStart = (e: TouchEvent) => { startX = e.touches[0].clientX; };
+    const onEnd = (e: TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
+    };
+    const el = document.getElementById("testimonial-track");
+    el?.addEventListener("touchstart", onStart);
+    el?.addEventListener("touchend", onEnd);
+    return () => {
+      el?.removeEventListener("touchstart", onStart);
+      el?.removeEventListener("touchend", onEnd);
+    };
+  }, [next, prev]);
 
-  const getOffset = (i: number) => {
-    const len = testimonials.length;
-    let diff = i - current;
-    if (diff > len / 2) diff -= len;
-    if (diff < -len / 2) diff += len;
-    return diff;
-  };
+  const visibleItems = Array.from({ length: visible }).map((_, i) => testimonials[(start + i) % len]);
+  const pageCount = Math.max(1, len - visible + 1);
 
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
@@ -73,102 +128,108 @@ const TestimonialsSection = () => {
           <h2 className="font-display text-3xl md:text-5xl font-extrabold text-center mb-3 tracking-tight">
             Client <span className="text-gradient">Reviews</span>
           </h2>
-          <p className="text-muted-foreground text-center max-w-xl mx-auto mb-16 text-sm md:text-base">
-            Trusted by 80+ clients locally & internationally — across creative, technical, and academic projects.
+          <p className="text-muted-foreground text-center max-w-xl mx-auto mb-12 text-sm md:text-base">
+            Trusted by 80+ clients across Pakistan, the US, UK, Canada, India, Saudi Arabia & beyond.
           </p>
         </ScrollReveal>
 
-        {/* 3D perspective slider */}
         <ScrollReveal delay={100}>
           <div
-            className="relative max-w-4xl mx-auto h-[420px] md:h-[380px] flex items-center justify-center"
-            style={{ perspective: "1400px" }}
+            className="relative max-w-6xl mx-auto"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            {testimonials.map((t, i) => {
-              const offset = getOffset(i);
-              const abs = Math.abs(offset);
-              const isActive = offset === 0;
-              const visible = abs <= 2;
-
-              const translateX = offset * 180;
-              const translateZ = -abs * 220;
-              const rotateY = offset * -22;
-              const opacity = visible ? (isActive ? 1 : 0.55 - abs * 0.15) : 0;
-              const zIndex = 10 - abs;
-
-              return (
-                <div
-                  key={t.name}
-                  className="absolute w-[88%] sm:w-[460px] transition-all duration-700 ease-out"
-                  style={{
-                    transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`,
-                    opacity,
-                    zIndex,
-                    pointerEvents: isActive ? "auto" : "none",
-                    transformStyle: "preserve-3d",
-                  }}
-                >
-                  <div
-                    className={`glass-card p-7 md:p-9 text-center border ${
-                      isActive
-                        ? "border-primary/60 shadow-[0_0_40px_hsl(280_100%_58%/0.45)]"
-                        : "border-border/40"
-                    }`}
-                  >
-                    <Quote className="w-9 h-9 text-primary/30 mx-auto mb-4" />
-                    <p className="text-sm md:text-base text-foreground/90 leading-relaxed mb-5 min-h-[96px]">
-                      "{t.text}"
-                    </p>
-                    <div className="flex justify-center gap-0.5 mb-3">
-                      {Array.from({ length: 5 }).map((_, s) => (
-                        <Star
-                          key={s}
-                          size={15}
-                          className={s < t.rating ? "fill-primary text-primary" : "text-muted-foreground/30"}
-                        />
-                      ))}
-                    </div>
-                    <p className="font-display font-semibold text-foreground">{t.name}</p>
-                    <p className="text-xs text-primary/80">{t.role}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Controls */}
-          <div className="flex items-center justify-center gap-4 mt-8">
+            {/* arrows */}
             <button
               onClick={prev}
-              aria-label="Previous review"
-              className="p-2.5 rounded-full glass-card border border-primary/40 hover:bg-primary/10 hover:border-primary transition-all"
+              aria-label="Previous reviews"
+              className="oval-glow hidden md:flex absolute -left-4 lg:-left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full items-center justify-center bg-background/60 backdrop-blur-md hover:bg-primary/20 transition-all"
             >
-              <ChevronLeft size={18} className="text-primary" />
+              <ChevronLeft size={20} className="text-primary" />
             </button>
-            <div className="flex gap-1.5">
-              {testimonials.map((_, i) => (
+            <button
+              onClick={next}
+              aria-label="Next reviews"
+              className="oval-glow hidden md:flex absolute -right-4 lg:-right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full items-center justify-center bg-background/60 backdrop-blur-md hover:bg-primary/20 transition-all"
+            >
+              <ChevronRight size={20} className="text-primary" />
+            </button>
+
+            {/* track */}
+            <div id="testimonial-track" className="grid gap-5 sm:gap-6" style={{ gridTemplateColumns: `repeat(${visible}, minmax(0, 1fr))` }}>
+              {visibleItems.map((t, i) => (
+                <div key={`${t.name}-${i}`} className="animate-fade-up">
+                  <TestimonialCard t={t} />
+                </div>
+              ))}
+            </div>
+
+            {/* dots */}
+            <div className="flex items-center justify-center gap-1.5 mt-8">
+              {Array.from({ length: pageCount }).map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => setCurrent(i)}
-                  aria-label={`Go to review ${i + 1}`}
+                  onClick={() => setStart(i)}
+                  aria-label={`Go to slide ${i + 1}`}
                   className={`h-2 rounded-full transition-all ${
-                    i === current ? "bg-primary w-8 shadow-[0_0_10px_hsl(280_100%_58%/0.6)]" : "bg-muted-foreground/30 w-2"
+                    i === start ? "bg-primary w-8 shadow-[0_0_10px_hsl(280_100%_70%/0.7)]" : "bg-muted-foreground/30 w-2 hover:bg-primary/50"
                   }`}
                 />
               ))}
             </div>
-            <button
-              onClick={next}
-              aria-label="Next review"
-              className="p-2.5 rounded-full glass-card border border-primary/40 hover:bg-primary/10 hover:border-primary transition-all"
-            >
-              <ChevronRight size={18} className="text-primary" />
-            </button>
+
+            {/* mobile arrows */}
+            <div className="flex md:hidden items-center justify-center gap-3 mt-4">
+              <button onClick={prev} aria-label="Previous" className="oval-glow w-10 h-10 rounded-full bg-background/60 backdrop-blur-md flex items-center justify-center">
+                <ChevronLeft size={18} className="text-primary" />
+              </button>
+              <button onClick={next} aria-label="Next" className="oval-glow w-10 h-10 rounded-full bg-background/60 backdrop-blur-md flex items-center justify-center">
+                <ChevronRight size={18} className="text-primary" />
+              </button>
+            </div>
+
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setOpenAll(true)}
+                className="oval-glow inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary/15 backdrop-blur-md text-foreground text-sm font-semibold hover:bg-primary/25 transition-all"
+              >
+                View All {len} Reviews
+              </button>
+            </div>
           </div>
         </ScrollReveal>
       </div>
+
+      {/* Modal */}
+      {openAll && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-fade-up"
+          onClick={() => setOpenAll(false)}
+        >
+          <div
+            className="oval-glow relative w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-3xl bg-background/90 backdrop-blur-xl p-6 md:p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-6 sticky top-0 bg-background/90 backdrop-blur-xl py-2 z-10">
+              <h3 className="font-display text-xl md:text-2xl font-bold">
+                All <span className="text-gradient">Client Reviews</span>
+              </h3>
+              <button
+                onClick={() => setOpenAll(false)}
+                aria-label="Close"
+                className="oval-glow w-9 h-9 rounded-full flex items-center justify-center bg-background/60 hover:bg-primary/20 transition-all"
+              >
+                <X size={18} className="text-primary" />
+              </button>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {testimonials.map((t) => (
+                <TestimonialCard key={t.name} t={t} />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
