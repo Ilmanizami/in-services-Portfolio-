@@ -224,4 +224,19 @@
     margin-bottom: 1.25rem;
     display: block;
   }
+
+  /* Custom thin scrollbar for dashboard widgets */
+  .custom-scroll::-webkit-scrollbar { width: 6px; }
+  .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background: hsl(280 100% 58% / 0.35);
+    border-radius: 3px;
+  }
+  .custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: hsl(280 100% 70% / 0.6);
+  }
+  .custom-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(280 100% 58% / 0.35) transparent;
+  }
 }
