@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import * as React from "react";
 
 export const useScrollAnimation = (threshold = 0.15) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const ref = React.useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -22,35 +22,49 @@ export const useScrollAnimation = (threshold = 0.15) => {
   return { ref, isVisible };
 };
 
-export const ScrollReveal = ({
-  children,
-  className = "",
-  delay = 0,
-  direction = "up",
-}: {
+type ScrollRevealProps = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   direction?: "up" | "left" | "right" | "scale";
-}) => {
-  const { ref, isVisible } = useScrollAnimation(0.1);
-
-  const directionStyles: Record<string, string> = {
-    up: "translate-y-12",
-    left: "-translate-x-12",
-    right: "translate-x-12",
-    scale: "scale-90",
-  };
-
-  return (
-    <div
-      ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        isVisible ? "opacity-100 translate-y-0 translate-x-0 scale-100" : `opacity-0 ${directionStyles[direction]}`
-      } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
 };
+
+export const ScrollReveal = React.forwardRef<HTMLDivElement, ScrollRevealProps>(
+  ({ children, className = "", delay = 0, direction = "up" }, forwardedRef) => {
+    const { ref, isVisible } = useScrollAnimation(0.1);
+
+    const setRefs = React.useCallback(
+      (node: HTMLDivElement | null) => {
+        ref.current = node;
+        if (typeof forwardedRef === "function") {
+          forwardedRef(node);
+        } else if (forwardedRef) {
+          forwardedRef.current = node;
+        }
+      },
+      [forwardedRef, ref]
+    );
+
+    const directionStyles: Record<NonNullable<ScrollRevealProps["direction"]>, string> = {
+      up: "translate-y-12",
+      left: "-translate-x-12",
+      right: "translate-x-12",
+      scale: "scale-90",
+    };
+
+    return (
+      <div
+        ref={setRefs}
+        className={`transition-all duration-700 ease-out ${
+          isVisible ? "opacity-100 translate-y-0 translate-x-0 scale-100" : `opacity-0 ${directionStyles[direction]}`
+        } ${className}`}
+        style={{ transitionDelay: `${delay}ms` }}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+ScrollReveal.displayName = "ScrollReveal";
+
