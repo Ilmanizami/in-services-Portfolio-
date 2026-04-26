@@ -72,6 +72,7 @@ const TestimonialsSection = () => {
   const [start, setStart] = useState(0);
   const [paused, setPaused] = useState(false);
   const [openAll, setOpenAll] = useState(false);
+  const { data: testimonials = [] } = useTestimonials();
 
   const len = testimonials.length;
 
