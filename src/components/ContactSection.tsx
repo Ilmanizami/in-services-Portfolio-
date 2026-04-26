@@ -1,21 +1,57 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Mail, Github, Linkedin, MapPin, Phone, Calendar, Send, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
+import { supabase } from "@/integrations/supabase/client";
+
+const FALLBACK = {
+  contact_email: "ilmanizami2k23@gmail.com",
+  contact_phone: "03243564150",
+  whatsapp_number: "923243564150",
+  calendly_url: "https://calendly.com/ilmanizami2k23/30min",
+  github_url: "https://github.com/Ilmanizami",
+  linkedin_url: "https://www.linkedin.com/in/ilmanizami/",
+};
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [sending, setSending] = useState(false);
 
+  const { data: settings } = useQuery({
+    queryKey: ["site-settings"],
+    queryFn: async () => {
+      const { data } = await supabase.from("site_settings").select("*").eq("id", 1).maybeSingle();
+      return data;
+    },
+  });
+
+  const s = {
+    contact_email: settings?.contact_email || FALLBACK.contact_email,
+    contact_phone: settings?.contact_phone || FALLBACK.contact_phone,
+    whatsapp_number: settings?.whatsapp_number || FALLBACK.whatsapp_number,
+    calendly_url: settings?.calendly_url || FALLBACK.calendly_url,
+    github_url: settings?.github_url || FALLBACK.github_url,
+    linkedin_url: settings?.linkedin_url || FALLBACK.linkedin_url,
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    const mailtoLink = `mailto:ilmanizami2k23@gmail.com?subject=${encodeURIComponent(formData.subject || "Portfolio Inquiry")}&body=${encodeURIComponent(`Hi Ilma,\n\nMy name is ${formData.name}.\n\n${formData.message}\n\nReply to: ${formData.email}`)}`;
+    const mailtoLink = `mailto:${s.contact_email}?subject=${encodeURIComponent(formData.subject || "Portfolio Inquiry")}&body=${encodeURIComponent(`Hi Ilma,\n\nMy name is ${formData.name}.\n\n${formData.message}\n\nReply to: ${formData.email}`)}`;
     window.open(mailtoLink, "_blank");
     toast.success("Opening your email client! You can also reach me via WhatsApp.");
     setSending(false);
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
+
+  const items = [
+    { href: `mailto:${s.contact_email}`, icon: Mail, title: "Email", sub: s.contact_email },
+    { href: `https://wa.me/${s.whatsapp_number.replace(/\D/g, "")}`, icon: Phone, title: "WhatsApp / Phone", sub: s.contact_phone, external: true },
+    { href: s.calendly_url, icon: Calendar, title: "Book a Meeting", sub: "Schedule a 30-min call on Calendly", external: true },
+    { href: s.github_url, icon: Github, title: "GitHub", sub: s.github_url.replace(/^https?:\/\//, ""), external: true },
+    { href: s.linkedin_url, icon: Linkedin, title: "LinkedIn", sub: "2,481 followers · 500+ connections", external: true },
+  ];
 
   return (
     <section id="contact" className="py-24 relative">
@@ -64,13 +100,7 @@ const ContactSection = () => {
 
           <ScrollReveal direction="right">
             <div className="space-y-4">
-              {[
-                { href: "mailto:ilmanizami2k23@gmail.com", icon: Mail, title: "Email", sub: "ilmanizami2k23@gmail.com" },
-                { href: "https://wa.me/923243564150", icon: Phone, title: "WhatsApp / Phone", sub: "03243564150", external: true },
-                { href: "https://calendly.com/ilmanizami2k23/30min", icon: Calendar, title: "Book a Meeting", sub: "Schedule a 30-min call on Calendly", external: true },
-                { href: "https://github.com/Ilmanizami", icon: Github, title: "GitHub", sub: "github.com/Ilmanizami", external: true },
-                { href: "https://www.linkedin.com/in/ilmanizami/", icon: Linkedin, title: "LinkedIn", sub: "2,481 followers · 500+ connections", external: true },
-              ].map((item, i) => (
+              {items.map((item, i) => (
                 <ScrollReveal key={item.title} delay={i * 80} direction="right">
                   <a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined} className="glass-card-3d p-5 flex items-center gap-4 hover:border-primary/50 transition-all block">
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">

@@ -8,6 +8,7 @@ import PremiumTools from "@/components/PremiumTools";
 import ProjectManagement from "@/components/ProjectManagement";
 import ProfessionalPulse from "@/components/ProfessionalPulse";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import FeedbackForm from "@/components/FeedbackForm";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
@@ -35,6 +36,8 @@ const Index = () => {
       <ProfessionalPulse />
       <div className="section-divider" />
       <TestimonialsSection />
+      <div className="section-divider" />
+      <FeedbackForm />
       <div className="section-divider" />
       <ContactSection />
       <Footer />
