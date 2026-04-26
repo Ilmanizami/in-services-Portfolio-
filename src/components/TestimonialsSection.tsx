@@ -76,14 +76,21 @@ const TestimonialsSection = () => {
 
   const len = testimonials.length;
 
-  const next = useCallback(() => setStart((s) => (s + 1) % len), [len]);
-  const prev = useCallback(() => setStart((s) => (s - 1 + len) % len), [len]);
+  const next = useCallback(() => {
+    if (len <= 1) return;
+    setStart((s) => (s + 1) % len);
+  }, [len]);
+
+  const prev = useCallback(() => {
+    if (len <= 1) return;
+    setStart((s) => (s - 1 + len) % len);
+  }, [len]);
 
   useEffect(() => {
-    if (paused || openAll) return;
+    if (paused || openAll || len <= 1) return;
     const timer = setInterval(next, 4500);
     return () => clearInterval(timer);
-  }, [paused, openAll, next]);
+  }, [paused, openAll, len, next]);
 
   // touch swipe
   useEffect(() => {
@@ -159,7 +166,8 @@ const TestimonialsSection = () => {
                   key={i}
                   onClick={() => setStart(i)}
                   aria-label={`Go to slide ${i + 1}`}
-                  className={`h-2 rounded-full transition-all ${
+                  disabled={len === 0}
+                  className={`h-2 rounded-full transition-all disabled:opacity-40 ${
                     i === start ? "bg-primary w-8 shadow-[0_0_10px_hsl(280_100%_70%/0.7)]" : "bg-muted-foreground/30 w-2 hover:bg-primary/50"
                   }`}
                 />
@@ -168,10 +176,10 @@ const TestimonialsSection = () => {
 
             {/* mobile arrows */}
             <div className="flex md:hidden items-center justify-center gap-3 mt-4">
-              <button onClick={prev} aria-label="Previous" className="oval-glow w-10 h-10 rounded-full bg-background/60 backdrop-blur-md flex items-center justify-center">
+              <button onClick={prev} aria-label="Previous" disabled={len <= 1} className="oval-glow w-10 h-10 rounded-full bg-background/60 backdrop-blur-md flex items-center justify-center disabled:opacity-40">
                 <ChevronLeft size={18} className="text-primary" />
               </button>
-              <button onClick={next} aria-label="Next" className="oval-glow w-10 h-10 rounded-full bg-background/60 backdrop-blur-md flex items-center justify-center">
+              <button onClick={next} aria-label="Next" disabled={len <= 1} className="oval-glow w-10 h-10 rounded-full bg-background/60 backdrop-blur-md flex items-center justify-center disabled:opacity-40">
                 <ChevronRight size={18} className="text-primary" />
               </button>
             </div>
