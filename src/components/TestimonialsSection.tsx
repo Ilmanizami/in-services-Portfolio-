@@ -102,7 +102,9 @@ const TestimonialsSection = () => {
     };
   }, [next, prev]);
 
-  const visibleItems = Array.from({ length: visible }).map((_, i) => testimonials[(start + i) % len]);
+  const visibleItems = len === 0
+    ? []
+    : Array.from({ length: Math.min(visible, len) }).map((_, i) => testimonials[(start + i) % len]);
   const pageCount = Math.max(1, len - visible + 1);
 
   return (
