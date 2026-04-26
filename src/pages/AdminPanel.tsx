@@ -132,7 +132,7 @@ const AdminPanel = () => {
 
   const saveSettings = useMutation({
     mutationFn: async (s: Record<string, string>) => {
-      const { error } = await supabase.from("site_settings").update(s).eq("id", 1);
+      const { error } = await supabase.from("site_settings").update(s as never).eq("id", 1);
       if (error) throw error;
     },
     onSuccess: () => {
@@ -317,7 +317,7 @@ const AdminPanel = () => {
                     ].map(([k, label]) => (
                       <div key={k} className="space-y-2">
                         <Label>{label}</Label>
-                        <Input name={k} defaultValue={(settings.data as Record<string, string | null>)[k] ?? ""} />
+                        <Input name={k} defaultValue={(settings.data as unknown as Record<string, string | null>)[k] ?? ""} />
                       </div>
                     ))}
                     <div className="md:col-span-2">
