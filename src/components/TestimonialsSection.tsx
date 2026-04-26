@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Star, Quote, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
+import { supabase } from "@/integrations/supabase/client";
 
 type Testimonial = {
   name: string;
@@ -10,42 +12,25 @@ type Testimonial = {
   text: string;
 };
 
-const testimonials: Testimonial[] = [
-  // 🇵🇰 Pakistani
-  { name: "Ahmed Ali", country: "Pakistan", service: "3D Animation", rating: 5,
-    text: "Cinematic 3D sequences delivered ahead of schedule — the lighting and camera work felt truly premium." },
-  { name: "Zainab Khan", country: "Pakistan", service: "Wedding Cards & Stationery", rating: 5,
-    text: "Our animated wedding invites were the talk of the event. Royal, elegant, and absolutely flawless." },
-  { name: "Bilal Ahmed", country: "Pakistan", service: "Portfolio Web Development", rating: 5,
-    text: "A clean, lightning-fast portfolio with thoughtful UX. Clients now take me far more seriously." },
-  { name: "Fatima Noor", country: "Pakistan", service: "Graphic Design", rating: 5,
-    text: "Brand identity work that captured exactly what I imagined — bold, modern, and on-message." },
-  { name: "Hamza Sheikh", country: "Pakistan", service: "AI Implementation", rating: 5,
-    text: "MindStream-style AI workflow integrated end-to-end. Cut my research time in half." },
-  { name: "Aisha Javed", country: "Pakistan", service: "CV / Resume Design", rating: 5,
-    text: "My resume finally stands out. Got 3 callbacks in the first week — total game-changer." },
-  // 🌍 International
-  { name: "Sarah Jenkins", country: "USA", service: "Motion Graphics", rating: 5,
-    text: "Smooth, professional motion design that elevated our entire YouTube channel. Highly recommend." },
-  { name: "Michael Ross", country: "UK", service: "Thumbnail Creation", rating: 5,
-    text: "CTR jumped 40% within two weeks. Sharp eye for what actually converts." },
-  { name: "Emily Taylor", country: "Canada", service: "Video Editing", rating: 5,
-    text: "Crisp cuts, perfect pacing, and audio that just sits right. Will absolutely book again." },
-  { name: "David Chen", country: "Australia", service: "Project Management", rating: 5,
-    text: "Communication was world-class — every milestone on time, every deliverable polished." },
-  { name: "Sofia Rossi", country: "Italy", service: "2D Character Art", rating: 5,
-    text: "Beautiful character design with real personality. Captured my brand's soul perfectly." },
-  // 🇮🇳 Indian
-  { name: "Arjun Kapoor", country: "India", service: "Tool Services", rating: 5,
-    text: "Genuine premium subscriptions, instant activation, and brilliant after-sales support." },
-  { name: "Priya Sharma", country: "India", service: "Data Entry & Research", rating: 5,
-    text: "Highly professional execution, zero errors, delivered ahead of the deadline." },
-  // 🇸🇦 Saudi
-  { name: "Abdullah Al-Farsi", country: "Saudi Arabia", service: "Branding & Identity", rating: 5,
-    text: "A complete visual ecosystem for our brand — sophisticated, consistent, and impactful." },
-  { name: "Layla Hussain", country: "Saudi Arabia", service: "AI Art & Illustration", rating: 5,
-    text: "Stunning AI-driven artwork with a luxury feel. Exactly what our campaign needed." },
-];
+const useTestimonials = () =>
+  useQuery({
+    queryKey: ["testimonials"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("testimonials")
+        .select("client_name,country,service_provided,rating,feedback_text")
+        .eq("is_approved", true)
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return (data ?? []).map((t): Testimonial => ({
+        name: t.client_name,
+        country: t.country ?? "",
+        service: t.service_provided,
+        rating: t.rating,
+        text: t.feedback_text,
+      }));
+    },
+  });
 
 const useVisibleCount = () => {
   const [n, setN] = useState(1);
