@@ -43,10 +43,23 @@ const linkedInFeed = [
   },
 ];
 
+const githubStats = [
+  { label: "Public Repos", value: "30+" },
+  { label: "Total Stars", value: "45" },
+  { label: "Contributions", value: "600+" },
+  { label: "Followers", value: "20" },
+];
+
+const topLanguages = [
+  { name: "Python", pct: 34, color: "hsl(280 100% 70%)" },
+  { name: "TypeScript", pct: 26, color: "hsl(210 100% 65%)" },
+  { name: "JavaScript", pct: 18, color: "hsl(48 95% 60%)" },
+  { name: "C++", pct: 12, color: "hsl(150 70% 50%)" },
+  { name: "HTML/CSS", pct: 10, color: "hsl(20 90% 60%)" },
+];
+
 const ProfessionalPulse = () => {
   const heatmapUrl = `https://ghchart.rshah.org/8b5cf6/${GITHUB_USER}`;
-  const statsUrl = `https://github-readme-stats.vercel.app/api?username=${GITHUB_USER}&show_icons=true&theme=radical&hide_border=true&bg_color=0E1024&title_color=C9A24A&icon_color=8b5cf6&text_color=cccccc`;
-  const topLangsUrl = `https://github-readme-stats.vercel.app/api/top-langs/?username=${GITHUB_USER}&layout=compact&theme=radical&hide_border=true&bg_color=0E1024&title_color=C9A24A&text_color=cccccc`;
 
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
