@@ -22,12 +22,18 @@ const schema = z.object({
   client_name: z.string().trim().min(1).max(100),
   client_email: z.string().trim().email().max(255).optional().or(z.literal("")),
   service_provided: z.string().min(1).max(100),
+  client_type: z.enum(["Project-based", "Permanent/Retainer"]),
+  duration: z.string().trim().min(1).max(50),
   rating: z.number().min(1).max(5),
   feedback_text: z.string().trim().min(10).max(1000),
 });
 
 const FeedbackForm = () => {
-  const [form, setForm] = useState({ client_name: "", client_email: "", service_provided: "", rating: 0, feedback_text: "" });
+  const [form, setForm] = useState({
+    client_name: "", client_email: "", service_provided: "",
+    client_type: "" as "" | "Project-based" | "Permanent/Retainer",
+    duration: "", rating: 0, feedback_text: "",
+  });
   const [hover, setHover] = useState(0);
   const { toast } = useToast();
 
@@ -41,7 +47,7 @@ const FeedbackForm = () => {
     },
     onSuccess: () => {
       toast({ title: "Thank you!", description: "Your feedback was submitted and will appear after approval." });
-      setForm({ client_name: "", client_email: "", service_provided: "", rating: 0, feedback_text: "" });
+      setForm({ client_name: "", client_email: "", service_provided: "", client_type: "", duration: "", rating: 0, feedback_text: "" });
     },
     onError: (e: Error) => toast({ title: "Could not submit", description: e.message, variant: "destructive" }),
   });
@@ -91,6 +97,28 @@ const FeedbackForm = () => {
               </Select>
             </div>
 
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Engagement type *</Label>
+                <Select value={form.client_type} onValueChange={(v) => setForm({ ...form, client_type: v as typeof form.client_type })}>
+                  <SelectTrigger><SelectValue placeholder="Select type" /></SelectTrigger>
+                  <SelectContent className="bg-popover">
+                    <SelectItem value="Project-based">Project-based</SelectItem>
+                    <SelectItem value="Permanent/Retainer">Permanent / Retainer</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Duration *</Label>
+                <Input
+                  required maxLength={50}
+                  placeholder="e.g. 10 Days, 6 Months"
+                  value={form.duration}
+                  onChange={(e) => setForm({ ...form, duration: e.target.value })}
+                />
+              </div>
+            </div>
+
             <div className="space-y-2">
               <Label>Rating *</Label>
               <div className="flex gap-1">
@@ -119,7 +147,7 @@ const FeedbackForm = () => {
               <p className="text-xs text-muted-foreground text-right">{form.feedback_text.length}/1000</p>
             </div>
 
-            <Button type="submit" disabled={submit.isPending || !form.rating || !form.service_provided} className="w-full">
+            <Button type="submit" disabled={submit.isPending || !form.rating || !form.service_provided || !form.client_type || !form.duration} className="w-full">
               {submit.isPending && <Loader2 className="animate-spin" />}
               Submit Review
             </Button>

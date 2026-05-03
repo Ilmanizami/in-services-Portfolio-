@@ -12,6 +12,7 @@ import FeedbackForm from "@/components/FeedbackForm";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
+import AdminFloatingShortcut from "@/components/AdminFloatingShortcut";
 import AnimatedBackground from "@/components/AnimatedBackground";
 
 const Index = () => {
@@ -42,6 +43,7 @@ const Index = () => {
       <ContactSection />
       <Footer />
       <FloatingCTA />
+      <AdminFloatingShortcut />
     </div>
   );
 };

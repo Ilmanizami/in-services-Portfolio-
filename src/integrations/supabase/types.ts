@@ -93,8 +93,10 @@ export type Database = {
         Row: {
           client_email: string | null
           client_name: string
+          client_type: string | null
           country: string | null
           created_at: string
+          duration: string | null
           feedback_text: string
           id: string
           is_approved: boolean
@@ -105,8 +107,10 @@ export type Database = {
         Insert: {
           client_email?: string | null
           client_name: string
+          client_type?: string | null
           country?: string | null
           created_at?: string
+          duration?: string | null
           feedback_text: string
           id?: string
           is_approved?: boolean
@@ -117,8 +121,10 @@ export type Database = {
         Update: {
           client_email?: string | null
           client_name?: string
+          client_type?: string | null
           country?: string | null
           created_at?: string
+          duration?: string | null
           feedback_text?: string
           id?: string
           is_approved?: boolean

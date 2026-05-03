@@ -5,8 +5,9 @@ import { toast } from "sonner";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import { supabase } from "@/integrations/supabase/client";
 
+// Identity is hardcoded and locked — email cannot be overridden from the database.
+const LOCKED_EMAIL = "ilmanizami2k23@gmail.com";
 const FALLBACK = {
-  contact_email: "ilmanizami2k23@gmail.com",
   contact_phone: "03243564150",
   whatsapp_number: "923243564150",
   calendly_url: "https://calendly.com/ilmanizami2k23/30min",
@@ -27,7 +28,7 @@ const ContactSection = () => {
   });
 
   const s = {
-    contact_email: settings?.contact_email || FALLBACK.contact_email,
+    contact_email: LOCKED_EMAIL,
     contact_phone: settings?.contact_phone || FALLBACK.contact_phone,
     whatsapp_number: settings?.whatsapp_number || FALLBACK.whatsapp_number,
     calendly_url: settings?.calendly_url || FALLBACK.calendly_url,
