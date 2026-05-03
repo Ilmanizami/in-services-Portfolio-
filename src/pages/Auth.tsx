@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
+import { OWNER_EMAIL } from "@/lib/admin";
 import { Loader2 } from "lucide-react";
 
 const schema = z.object({
@@ -36,15 +37,20 @@ const AuthPage = () => {
       return;
     }
     setBusy(true);
+    if (parsed.data.email.toLowerCase() !== OWNER_EMAIL) {
+      toast({ title: "Access denied", description: "This portal is restricted to the site owner.", variant: "destructive" });
+      setBusy(false);
+      return;
+    }
     if (mode === "signup") {
       const { error } = await supabase.auth.signUp({
-        email, password,
+        email: parsed.data.email, password,
         options: { emailRedirectTo: `${window.location.origin}/admin-panel` },
       });
       if (error) toast({ title: "Sign up failed", description: error.message, variant: "destructive" });
       else toast({ title: "Account created", description: "You can now sign in." });
     } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { error } = await supabase.auth.signInWithPassword({ email: parsed.data.email, password });
       if (error) toast({ title: "Sign in failed", description: error.message, variant: "destructive" });
       else navigate("/admin-panel", { replace: true });
     }

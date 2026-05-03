@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { OWNER_EMAIL } from "@/lib/admin";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,7 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Trash2, Pencil, Plus, LogOut, Star } from "lucide-react";
+import { Loader2, Trash2, Pencil, Plus, LogOut, Star, Check } from "lucide-react";
 
 type Project = {
   id: string; title: string; description: string; image_url: string | null;
@@ -32,9 +33,14 @@ const AdminPanel = () => {
 
   useEffect(() => {
     if (loading) return;
-    if (!user) navigate("/auth", { replace: true });
-    else if (!isAdmin) {
-      toast({ title: "Access denied", description: "You are not an admin.", variant: "destructive" });
+    if (!user) {
+      navigate("/auth", { replace: true });
+      return;
+    }
+    const ownerOk = user.email?.toLowerCase() === OWNER_EMAIL;
+    if (!ownerOk || !isAdmin) {
+      toast({ title: "Access denied", description: "This area is restricted to the site owner.", variant: "destructive" });
+      supabase.auth.signOut();
       navigate("/", { replace: true });
     }
   }, [user, isAdmin, loading, navigate, toast]);
