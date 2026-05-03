@@ -5,11 +5,11 @@ import { toast } from "sonner";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
 import { supabase } from "@/integrations/supabase/client";
 
-// Identity is hardcoded and locked — email cannot be overridden from the database.
+// Identity is hardcoded and locked — these values cannot be overridden by the database.
 const LOCKED_EMAIL = "ilmanizami2k23@gmail.com";
+const LOCKED_PHONE = "03243564150";
+const LOCKED_WHATSAPP = "923243564150";
 const FALLBACK = {
-  contact_phone: "03243564150",
-  whatsapp_number: "923243564150",
   calendly_url: "https://calendly.com/ilmanizami2k23/30min",
   github_url: "https://github.com/Ilmanizami",
   linkedin_url: "https://www.linkedin.com/in/ilmanizami/",
