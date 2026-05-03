@@ -117,8 +117,28 @@ const ProfessionalPulse = () => {
                     className="max-w-full h-auto opacity-90 min-w-[600px] sm:min-w-0"
                   />
                 </div>
-                <img src={statsUrl} alt="GitHub stats" loading="lazy" className="w-full rounded-lg border border-border/40" />
-                <img src={topLangsUrl} alt="Top languages" loading="lazy" className="w-full rounded-lg border border-border/40" />
+                <div className="grid grid-cols-2 gap-3">
+                  {githubStats.map((s) => (
+                    <div key={s.label} className="rounded-lg border border-border/40 bg-background/40 p-3 text-center">
+                      <p className="font-display text-xl font-bold text-primary">{s.value}</p>
+                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="rounded-lg border border-border/40 bg-background/40 p-4 space-y-3">
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Top Languages</p>
+                  {topLanguages.map((l) => (
+                    <div key={l.name}>
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span className="text-foreground font-medium">{l.name}</span>
+                        <span className="text-muted-foreground">{l.pct}%</span>
+                      </div>
+                      <div className="h-1.5 rounded-full bg-secondary overflow-hidden">
+                        <div className="h-full rounded-full" style={{ width: `${l.pct}%`, background: l.color }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </ScrollReveal>
