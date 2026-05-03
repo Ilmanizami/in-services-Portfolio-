@@ -43,10 +43,23 @@ const linkedInFeed = [
   },
 ];
 
+const githubStats = [
+  { label: "Public Repos", value: "30+" },
+  { label: "Total Stars", value: "45" },
+  { label: "Contributions", value: "600+" },
+  { label: "Followers", value: "20" },
+];
+
+const topLanguages = [
+  { name: "Python", pct: 34, color: "hsl(280 100% 70%)" },
+  { name: "TypeScript", pct: 26, color: "hsl(210 100% 65%)" },
+  { name: "JavaScript", pct: 18, color: "hsl(48 95% 60%)" },
+  { name: "C++", pct: 12, color: "hsl(150 70% 50%)" },
+  { name: "HTML/CSS", pct: 10, color: "hsl(20 90% 60%)" },
+];
+
 const ProfessionalPulse = () => {
   const heatmapUrl = `https://ghchart.rshah.org/8b5cf6/${GITHUB_USER}`;
-  const statsUrl = `https://github-readme-stats.vercel.app/api?username=${GITHUB_USER}&show_icons=true&theme=radical&hide_border=true&bg_color=0E1024&title_color=C9A24A&icon_color=8b5cf6&text_color=cccccc`;
-  const topLangsUrl = `https://github-readme-stats.vercel.app/api/top-langs/?username=${GITHUB_USER}&layout=compact&theme=radical&hide_border=true&bg_color=0E1024&title_color=C9A24A&text_color=cccccc`;
 
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
@@ -104,8 +117,28 @@ const ProfessionalPulse = () => {
                     className="max-w-full h-auto opacity-90 min-w-[600px] sm:min-w-0"
                   />
                 </div>
-                <img src={statsUrl} alt="GitHub stats" loading="lazy" className="w-full rounded-lg border border-border/40" />
-                <img src={topLangsUrl} alt="Top languages" loading="lazy" className="w-full rounded-lg border border-border/40" />
+                <div className="grid grid-cols-2 gap-3">
+                  {githubStats.map((s) => (
+                    <div key={s.label} className="rounded-lg border border-border/40 bg-background/40 p-3 text-center">
+                      <p className="font-display text-xl font-bold text-primary">{s.value}</p>
+                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="rounded-lg border border-border/40 bg-background/40 p-4 space-y-3">
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Top Languages</p>
+                  {topLanguages.map((l) => (
+                    <div key={l.name}>
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span className="text-foreground font-medium">{l.name}</span>
+                        <span className="text-muted-foreground">{l.pct}%</span>
+                      </div>
+                      <div className="h-1.5 rounded-full bg-secondary overflow-hidden">
+                        <div className="h-full rounded-full" style={{ width: `${l.pct}%`, background: l.color }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </ScrollReveal>
