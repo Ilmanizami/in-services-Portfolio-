@@ -271,6 +271,17 @@ const AdminPanel = () => {
 
           {/* REVIEWS */}
           <TabsContent value="reviews" className="space-y-4 mt-6">
+            {testimonials.isLoading && (
+              <div className="text-sm text-muted-foreground flex items-center gap-2">
+                <Loader2 className="animate-spin h-4 w-4" /> Loading reviews…
+              </div>
+            )}
+            {testimonials.isError && (
+              <p className="text-sm text-destructive">Failed to load reviews. Please refresh.</p>
+            )}
+            {testimonials.data?.length === 0 && (
+              <p className="text-sm text-muted-foreground">No reviews yet.</p>
+            )}
             {testimonials.data?.map((t) => (
               <Card key={t.id} className="oval-glow border-border">
                 <CardContent className="pt-6 flex items-start justify-between gap-4 flex-wrap">
@@ -278,7 +289,21 @@ const AdminPanel = () => {
                     <div className="flex items-center gap-2 flex-wrap">
                       <h3 className="font-display font-semibold">{t.client_name}</h3>
                       <span className="text-xs text-muted-foreground">· {t.country || "—"} · {t.service_provided}</span>
-                      {!t.is_approved && <Badge variant="outline" className="text-amber-400 border-amber-400/40">Pending</Badge>}
+                      {t.is_approved
+                        ? <Badge className="bg-green-500/15 text-green-400 border-green-400/40" variant="outline">Approved</Badge>
+                        : <Badge variant="outline" className="text-amber-400 border-amber-400/40">Pending</Badge>}
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-2 text-xs">
+                      {t.client_type && (
+                        <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                          {t.client_type}
+                        </span>
+                      )}
+                      {t.duration && (
+                        <span className="px-2 py-0.5 rounded-full bg-secondary/40 text-foreground/80 border border-border">
+                          Duration: {t.duration}
+                        </span>
+                      )}
                     </div>
                     <div className="flex gap-0.5 my-2">
                       {Array.from({ length: 5 }).map((_, i) => (
@@ -288,13 +313,31 @@ const AdminPanel = () => {
                     <p className="text-sm text-muted-foreground">"{t.feedback_text}"</p>
                     {t.client_email && <p className="text-xs text-muted-foreground mt-1">{t.client_email}</p>}
                   </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <div className="flex items-center gap-2">
-                      <Switch checked={t.is_approved} onCheckedChange={(v) => toggleApprove.mutate({ id: t.id, is_approved: v })} />
-                      <Label className="text-xs">Approved</Label>
-                    </div>
-                    <Button size="icon" variant="destructive" onClick={() => { if (confirm("Delete review?")) deleteTestimonial.mutate(t.id); }}>
-                      <Trash2 className="h-4 w-4" />
+                  <div className="flex flex-col items-stretch gap-2 min-w-[120px]">
+                    {!t.is_approved && (
+                      <Button
+                        size="sm"
+                        onClick={() => toggleApprove.mutate({ id: t.id, is_approved: true })}
+                        className="bg-green-600 hover:bg-green-600/90 text-white"
+                      >
+                        <Check className="h-4 w-4 mr-1" /> Approve
+                      </Button>
+                    )}
+                    {t.is_approved && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => toggleApprove.mutate({ id: t.id, is_approved: false })}
+                      >
+                        Unapprove
+                      </Button>
+                    )}
+                    <Button
+                      size="sm"
+                      variant="destructive"
+                      onClick={() => { if (confirm("Delete review?")) deleteTestimonial.mutate(t.id); }}
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" /> Delete
                     </Button>
                   </div>
                 </CardContent>
