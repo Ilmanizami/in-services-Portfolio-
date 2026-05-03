@@ -29,8 +29,8 @@ const ContactSection = () => {
 
   const s = {
     contact_email: LOCKED_EMAIL,
-    contact_phone: settings?.contact_phone || FALLBACK.contact_phone,
-    whatsapp_number: settings?.whatsapp_number || FALLBACK.whatsapp_number,
+    contact_phone: LOCKED_PHONE,
+    whatsapp_number: LOCKED_WHATSAPP,
     calendly_url: settings?.calendly_url || FALLBACK.calendly_url,
     github_url: settings?.github_url || FALLBACK.github_url,
     linkedin_url: settings?.linkedin_url || FALLBACK.linkedin_url,
