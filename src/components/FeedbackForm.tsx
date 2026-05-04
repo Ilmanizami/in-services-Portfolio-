@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { z } from "zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,18 +36,20 @@ const FeedbackForm = () => {
   });
   const [hover, setHover] = useState(0);
   const { toast } = useToast();
+  const qc = useQueryClient();
 
   const submit = useMutation({
     mutationFn: async () => {
       const parsed = schema.safeParse(form);
       if (!parsed.success) throw new Error(parsed.error.issues[0].message);
-      const payload = { ...parsed.data, client_email: parsed.data.client_email || null, is_approved: false };
+      const payload = { ...parsed.data, client_email: parsed.data.client_email || null, is_approved: true };
       const { error } = await supabase.from("testimonials").insert(payload);
       if (error) throw error;
     },
     onSuccess: () => {
-      toast({ title: "Thank you!", description: "Your feedback was submitted and will appear after approval." });
+      toast({ title: "Thank you!", description: "Your review is now live on the portfolio." });
       setForm({ client_name: "", client_email: "", service_provided: "", client_type: "", duration: "", rating: 0, feedback_text: "" });
+      qc.invalidateQueries({ queryKey: ["testimonials"] });
     },
     onError: (e: Error) => toast({ title: "Could not submit", description: e.message, variant: "destructive" }),
   });
@@ -152,7 +154,7 @@ const FeedbackForm = () => {
               Submit Review
             </Button>
             <p className="text-xs text-muted-foreground text-center">
-              Your review will appear publicly after approval.
+              Your review will appear on the portfolio instantly.
             </p>
           </form>
         </ScrollReveal>
