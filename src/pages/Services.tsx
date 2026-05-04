@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import {
-  Palette, Video, Film, Code, Briefcase, FileText, Wrench, ArrowRight, CheckCircle,
-  PenTool, Image, Layers, Type, Heart, Sparkles, BookOpen, Monitor
+  Palette, Video, Shirt, CreditCard, Heart, GraduationCap, Sticker,
+  ArrowRight, CheckCircle, Printer,
 } from "lucide-react";
 
 const serviceCategories = [
@@ -9,96 +9,72 @@ const serviceCategories = [
     title: "Graphic Designing",
     icon: Palette,
     services: [
-      "Brand Identity Design", "Logo Design", "Business Card Design", "Letterhead",
-      "Marketing Materials", "Flyers & Pamphlets", "Posters & Banners",
-      "Stickers & Labels", "Social Media Posts", "Thumbnails & Banners",
-      "Catalog & Booklet Designing", "CV & Resume Design",
-      "Menu Design", "Portfolio Design", "Certificates",
-      "Presentation Design", "Social Media Story Templates",
+      "2D & 3D Art",
+      "Pixel Art",
+      "V-Tubers",
+      "Label Designing",
+      "Family Tree Illustrations",
     ],
   },
   {
     title: "Video Editing",
     icon: Video,
     services: [
-      "Social Media Reels Editing", "Event Highlights Video",
-      "Voiceover-Based Reels/Videos", "Branding Reels",
-      "YouTube Videos", "Promotional Ads", "Corporate Content", "Color Grading",
+      "Short-form Reels / TikToks",
+      "Long-form Animated Content",
+      "Motion Graphics",
+      "Visual Animation",
     ],
   },
   {
-    title: "Reel Animation",
-    icon: Film,
+    title: "Apparel & T-Shirt",
+    icon: Shirt,
     services: [
-      "Instagram Reels", "TikTok Content", "Motion Graphics",
-      "Animated Stories", "Kinetic Typography",
+      "Custom T-shirt Designing",
+      "Professional Printing Services",
     ],
   },
   {
-    title: "2D Art & Illustration",
-    icon: PenTool,
+    title: "Visiting Cards",
+    icon: CreditCard,
     services: [
-      "2D Character Designing", "Illustration & Digital Art",
-      "Mascot & Cartoon Art", "Children's Book Illustrations",
-      "Music Cover Art", "2D Sprite Sheets",
+      "Normal Cards",
+      "Glossy Sheets",
+      "Hard Sheets",
     ],
   },
   {
-    title: "Wedding & Events",
+    title: "Stationery & Events",
     icon: Heart,
     services: [
-      "Wedding Props", "Animated Wedding Cards",
-      "Wedding Certificates", "Invitation Cards", "Event Banners",
+      "Wedding Cards",
+      "Wedding Props",
+      "Professional Letters",
     ],
   },
   {
-    title: "Web Development",
-    icon: Code,
+    title: "Academic & Professional",
+    icon: GraduationCap,
     services: [
-      "React / TypeScript", "Full-Stack Apps", "Landing Pages",
-      "API Integration", "Portfolio Sites", "UI/UX Design",
+      "Assignment Printing",
+      "FYP (Final Year Project) Documents",
+      "Panaflex Printing",
     ],
   },
   {
-    title: "Project Management",
-    icon: Briefcase,
+    title: "Stickers",
+    icon: Sticker,
     services: [
-      "Agile Workflow", "Team Coordination", "Deadline Management",
-      "Quality Assurance", "SQL-Based DB Projects",
+      "High-quality Custom Sticker Printing",
     ],
   },
   {
-    title: "FYP Panaflex & Posters",
-    icon: FileText,
+    title: "Specialized Printing",
+    icon: Printer,
     services: [
-      "Report Analysis", "Professional Panaflex Design", "Print Production",
-      "On-Site Delivery", "Academic Posters",
-    ],
-  },
-  {
-    title: "Academic & Tutoring",
-    icon: BookOpen,
-    services: [
-      "Programming Fundamentals", "SQL & Databases", "Java & OOP",
-      "DSA", "Software Engineering", "Final Year Projects",
-      "MATLAB Assignments", "General Assignments",
-    ],
-  },
-  {
-    title: "Tools & Solutions",
-    icon: Wrench,
-    services: [
-      "Software Setup", "Tool Licensing", "Tech Support",
-      "Affordable Rates", "Assignment & Projects Support",
-    ],
-  },
-  {
-    title: "AI Art & Content",
-    icon: Sparkles,
-    services: [
-      "Generative AI Visual Design", "AI Product Photography",
-      "AI Video Production", "Prompt Engineering",
-      "Ultra-Realistic Digital Images",
+      "Bulk Print Production",
+      "On-Site Delivery",
+      "Premium Finishes",
     ],
   },
 ];
