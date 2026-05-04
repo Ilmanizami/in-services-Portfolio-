@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { Menu, X } from "lucide-react";
 
-const navItems = [
+type NavItem = {
+  label: string;
+  path?: string;          // route to navigate to
+  id?: string;            // section id on home page
+  serviceId?: string;     // section id on /services page
+};
+
+const navItems: NavItem[] = [
   { label: "Home", path: "/" },
-  { label: "Engineering Lab", id: "engineering-lab" },
-  { label: "Creative Studio", id: "projects" },
-  { label: "Tool Hub", id: "tools" },
-  { label: "Project Management", id: "project-management" },
+  { label: "Graphic Design", serviceId: "graphic-design" },
+  { label: "Video Editing", serviceId: "video-editing" },
+  { label: "Printing Services", serviceId: "printing-services" },
+  { label: "Apparel", serviceId: "apparel" },
+  { label: "Feedback", id: "feedback" },
   { label: "Contact", id: "contact" },
 ];
 
@@ -16,6 +24,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -23,17 +32,45 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNav = (item: (typeof navItems)[0]) => {
+  const scrollToId = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const handleNav = (item: NavItem) => {
     setOpen(false);
-    if (item.path) return;
+
+    if (item.path) {
+      if (location.pathname !== item.path) navigate(item.path);
+      else window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (item.serviceId) {
+      if (location.pathname !== "/services") {
+        navigate(`/services#${item.serviceId}`);
+      } else {
+        scrollToId(item.serviceId);
+      }
+      return;
+    }
+
     if (item.id) {
       if (location.pathname !== "/") {
-        window.location.href = `/#${item.id}`;
-        return;
+        navigate(`/#${item.id}`);
+      } else {
+        scrollToId(item.id);
       }
-      document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // Smooth-scroll to hash on home page after navigation
+  useEffect(() => {
+    if (location.pathname === "/" && location.hash) {
+      const id = location.hash.replace("#", "");
+      setTimeout(() => scrollToId(id), 100);
+    }
+  }, [location.pathname, location.hash]);
 
   return (
     <nav
@@ -44,7 +81,6 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        {/* LEFT — Logo + Brand on a single line */}
         <Link to="/" className="flex items-center gap-3 shrink-0 min-w-0">
           <div
             className="relative shrink-0 rounded-full overflow-hidden border border-primary/40 shadow-[0_0_18px_hsl(280_100%_58%/0.35)] bg-background/80"
@@ -63,27 +99,15 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden lg:flex items-center gap-1">
-          {navItems.map((item) =>
-            item.path ? (
-              <Link
-                key={item.label}
-                to={item.path}
-                className={`text-sm font-medium px-3 py-2 rounded-lg transition-all hover:text-primary hover:bg-primary/10 ${
-                  location.pathname === item.path ? "text-primary bg-primary/10" : "text-muted-foreground"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ) : (
-              <button
-                key={item.label}
-                onClick={() => handleNav(item)}
-                className="text-sm font-medium text-muted-foreground px-3 py-2 rounded-lg transition-all hover:text-primary hover:bg-primary/10"
-              >
-                {item.label}
-              </button>
-            )
-          )}
+          {navItems.map((item) => (
+            <button
+              key={item.label}
+              onClick={() => handleNav(item)}
+              className="text-sm font-medium text-muted-foreground px-3 py-2 rounded-lg transition-all hover:text-primary hover:bg-primary/10"
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
 
         <button className="lg:hidden text-foreground" onClick={() => setOpen(!open)} aria-label="Toggle menu">
@@ -93,17 +117,15 @@ const Navbar = () => {
 
       {open && (
         <div className="lg:hidden bg-background/95 backdrop-blur-2xl border-b border-primary/20 px-4 pb-4 space-y-1">
-          {navItems.map((item) =>
-            item.path ? (
-              <Link key={item.label} to={item.path} onClick={() => setOpen(false)} className="block text-sm font-medium text-muted-foreground hover:text-primary py-2.5 px-3 rounded-lg hover:bg-primary/10">
-                {item.label}
-              </Link>
-            ) : (
-              <button key={item.label} onClick={() => handleNav(item)} className="block text-sm font-medium text-muted-foreground hover:text-primary py-2.5 px-3 rounded-lg hover:bg-primary/10 w-full text-left">
-                {item.label}
-              </button>
-            )
-          )}
+          {navItems.map((item) => (
+            <button
+              key={item.label}
+              onClick={() => handleNav(item)}
+              className="block text-sm font-medium text-muted-foreground hover:text-primary py-2.5 px-3 rounded-lg hover:bg-primary/10 w-full text-left"
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
       )}
     </nav>
