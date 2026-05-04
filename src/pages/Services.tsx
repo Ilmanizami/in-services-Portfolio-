@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import {
   Palette, Video, Shirt, CreditCard, Heart, GraduationCap, Sticker,
@@ -6,80 +8,66 @@ import {
 
 const serviceCategories = [
   {
+    id: "graphic-design",
     title: "Graphic Designing",
     icon: Palette,
-    services: [
-      "2D & 3D Art",
-      "Pixel Art",
-      "V-Tubers",
-      "Label Designing",
-      "Family Tree Illustrations",
-    ],
+    services: ["2D Art", "3D Art", "Pixel Art", "V-Tubers", "Label Designing", "Family Tree Illustrations"],
   },
   {
+    id: "video-editing",
     title: "Video Editing",
     icon: Video,
-    services: [
-      "Short-form Reels / TikToks",
-      "Long-form Animated Content",
-      "Motion Graphics",
-      "Visual Animation",
-    ],
+    services: ["Short-form Reels / TikToks", "Long-form Animated Content", "Motion Graphics", "Visual Animation"],
   },
   {
+    id: "apparel",
     title: "Apparel & T-Shirt",
     icon: Shirt,
-    services: [
-      "Custom T-shirt Designing",
-      "Professional Printing Services",
-    ],
+    services: ["Professional T-shirt Designing", "High-Quality Printing"],
   },
   {
+    id: "visiting-cards",
     title: "Visiting Cards",
     icon: CreditCard,
-    services: [
-      "Normal Cards",
-      "Glossy Sheets",
-      "Hard Sheets",
-    ],
+    services: ["Normal Cards", "Glossy Sheets", "Hard Sheets"],
   },
   {
-    title: "Stationery & Events",
+    id: "wedding-events",
+    title: "Wedding & Events",
     icon: Heart,
-    services: [
-      "Wedding Cards",
-      "Wedding Props",
-      "Professional Letters",
-    ],
+    services: ["Wedding Cards", "Wedding Props", "Professional Letters"],
   },
   {
+    id: "academic",
     title: "Academic & Professional",
     icon: GraduationCap,
-    services: [
-      "Assignment Printing",
-      "FYP (Final Year Project) Documents",
-      "Panaflex Printing",
-    ],
+    services: ["Assignment Printing", "FYP (Final Year Project) Documents", "Panaflex Printing"],
   },
   {
+    id: "stickers",
     title: "Stickers",
     icon: Sticker,
-    services: [
-      "High-quality Custom Sticker Printing",
-    ],
+    services: ["High-quality Custom Sticker Printing"],
   },
   {
+    id: "printing-services",
     title: "Specialized Printing",
     icon: Printer,
-    services: [
-      "Bulk Print Production",
-      "On-Site Delivery",
-      "Premium Finishes",
-    ],
+    services: ["Bespoke Bulk Print Production", "On-Site Delivery", "Premium Finishes", "Custom Print Solutions"],
   },
 ];
 
 const Services = () => {
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (!hash) return;
+    const id = hash.replace("#", "");
+    const t = setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+    return () => clearTimeout(t);
+  }, [hash]);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -102,7 +90,7 @@ const Services = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 perspective-container">
             {serviceCategories.map((cat) => (
-              <div key={cat.title} className="glass-card-3d p-7 hover:border-primary/50 flex flex-col group">
+              <div key={cat.title} id={cat.id} className="glass-card-3d p-7 hover:border-primary/50 flex flex-col group scroll-mt-24">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                     <cat.icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
