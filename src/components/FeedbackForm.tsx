@@ -154,7 +154,7 @@ const FeedbackForm = () => {
               Submit Review
             </Button>
             <p className="text-xs text-muted-foreground text-center">
-              Your review will appear publicly after approval.
+              Your review will appear on the portfolio instantly.
             </p>
           </form>
         </ScrollReveal>
