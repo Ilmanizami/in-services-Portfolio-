@@ -23,7 +23,7 @@ const creativeTools: Tool[] = [
   { name: "Google Veo 3.1", logo: "https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg" },
   { name: "Blender", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" },
   { name: "Autodesk Maya", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maya/maya-original.svg" },
-  { name: "CapCut Pro", logo: "https://cdn.brandfetch.io/idQA0VbXKL/w/400/h/400/theme/dark/icon.png" },
+  { name: "CapCut Pro", logo: "https://cdn.simpleicons.org/capcut/00C8FF" },
   { name: "Adobe Illustrator", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" },
   { name: "Adobe Photoshop", logo: "https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" },
   { name: "Photoshop Express", logo: "https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" },
