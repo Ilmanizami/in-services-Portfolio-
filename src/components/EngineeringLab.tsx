@@ -63,7 +63,7 @@ const ToolBadge = ({ tool }: { tool: Tool }) => (
 
 const EngineeringLab = () => {
   return (
-    <section id="engineering-lab" className="py-24 relative overflow-hidden">
+    <section id="creative-works" className="py-24 relative overflow-hidden scroll-mt-24">
       <div className="floating-orb w-96 h-96 bg-primary -left-48 top-10" />
       <div className="floating-orb w-72 h-72 bg-accent -right-36 bottom-10" style={{ animationDelay: "3s" }} />
 

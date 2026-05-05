@@ -63,7 +63,7 @@ const bundles: Bundle[] = [
 
 const PremiumTools = () => {
   return (
-    <section id="tools" className="py-24 relative overflow-hidden">
+    <section id="digital-tools" className="py-24 relative overflow-hidden scroll-mt-24">
       <div className="floating-orb w-72 h-72 bg-primary -right-36 top-10" style={{ animationDelay: "2s" }} />
 
       <div className="container mx-auto px-4 relative z-10">

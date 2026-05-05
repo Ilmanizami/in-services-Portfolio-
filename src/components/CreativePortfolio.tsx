@@ -134,7 +134,7 @@ const CreativePortfolio = () => {
   const filtered = active === "all" ? projects : projects.filter((p) => p.cat === active);
 
   return (
-    <section id="projects" className="py-24 bg-secondary/20 relative overflow-hidden">
+    <section id="portfolio-showcase" className="py-24 bg-secondary/20 relative overflow-hidden scroll-mt-24">
       <div className="floating-orb w-80 h-80 bg-accent -right-40 top-20" />
       <div className="floating-orb w-64 h-64 bg-primary -left-32 bottom-20" style={{ animationDelay: "4s" }} />
 

@@ -11,13 +11,14 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "Home", path: "/" },
-  { label: "Graphic Design", serviceId: "graphic-design" },
-  { label: "Video Editing", serviceId: "video-editing" },
-  { label: "Printing Services", serviceId: "printing-services" },
-  { label: "Apparel", serviceId: "apparel" },
-  { label: "Feedback", id: "feedback" },
-  { label: "Contact", id: "contact" },
+  { label: "Home", id: "hero" },
+  { label: "About", id: "about" },
+  { label: "Experience", id: "professional-pulse" },
+  { label: "Work", id: "portfolio-showcase" },
+  { label: "Services", id: "creative-works" },
+  { label: "Store", id: "digital-tools" },
+  { label: "Reviews", id: "feedback" },
+  { label: "Contact", id: "proposal" },
 ];
 
 const Navbar = () => {
