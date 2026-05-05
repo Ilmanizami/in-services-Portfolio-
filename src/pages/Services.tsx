@@ -106,6 +106,36 @@ const Services = () => {
             ))}
           </div>
 
+          <div className="mt-20 mb-10 text-center">
+            <div className="inline-flex items-center gap-2 mb-3 px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10 text-primary text-xs font-semibold">
+              <Printer size={14} /> Specialized Printing Hub
+            </div>
+            <h2 className="font-display text-2xl md:text-3xl font-bold">
+              Printing <span className="text-gradient">Services</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 perspective-container">
+            {printingHub.map((cat) => (
+              <div key={cat.title} id={cat.id} className="glass-card-3d p-7 hover:border-primary/50 flex flex-col group scroll-mt-24">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <cat.icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
+                  </div>
+                  <h3 className="font-display text-lg font-semibold text-foreground">{cat.title}</h3>
+                </div>
+                <ul className="space-y-1.5 flex-1">
+                  {cat.services.map((s) => (
+                    <li key={s} className="flex items-center gap-2 text-xs text-foreground/80">
+                      <CheckCircle size={12} className="text-primary shrink-0" />
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
           <div className="mt-16 glass-card-3d p-8 md:p-12 text-center">
             <h2 className="font-display text-2xl md:text-3xl font-bold mb-4">
               Ready to <span className="text-gradient">Get Started?</span>
