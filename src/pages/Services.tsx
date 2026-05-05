@@ -23,19 +23,22 @@ const serviceCategories = [
     id: "apparel",
     title: "Apparel & T-Shirt",
     icon: Shirt,
-    services: ["Professional T-shirt Designing", "High-Quality Printing"],
+    services: ["Professional T-shirt Designing", "Premium Quality T-shirt Printing"],
   },
+];
+
+const printingHub = [
   {
     id: "visiting-cards",
     title: "Visiting Cards",
     icon: CreditCard,
-    services: ["Normal Cards", "Glossy Sheets", "Hard Sheets"],
+    services: ["Normal Usual Cards", "Glossy Sheets", "Hard Sheets"],
   },
   {
     id: "wedding-events",
-    title: "Wedding & Events",
+    title: "Events & Stationery",
     icon: Heart,
-    services: ["Wedding Cards", "Wedding Props", "Professional Letters"],
+    services: ["Wedding Cards", "Professional Letters", "Wedding Props"],
   },
   {
     id: "academic",
@@ -45,15 +48,9 @@ const serviceCategories = [
   },
   {
     id: "stickers",
-    title: "Stickers",
+    title: "Custom",
     icon: Sticker,
-    services: ["High-quality Custom Sticker Printing"],
-  },
-  {
-    id: "printing-services",
-    title: "Specialized Printing",
-    icon: Printer,
-    services: ["Bespoke Bulk Print Production", "On-Site Delivery", "Premium Finishes", "Custom Print Solutions"],
+    services: ["High-quality Sticker Printing"],
   },
 ];
 
