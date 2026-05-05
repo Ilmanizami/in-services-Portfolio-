@@ -45,7 +45,7 @@ const serviceGroups: ServiceGroup[] = [
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-24 relative">
+    <section id="about" className="py-24 relative scroll-mt-24">
       <div className="floating-orb w-80 h-80 bg-accent -right-40 top-0" />
 
       <div className="container mx-auto px-4 relative z-10">

@@ -55,7 +55,7 @@ const FeedbackForm = () => {
   });
 
   return (
-    <section id="feedback" className="py-24 relative overflow-hidden">
+    <section id="feedback" className="py-24 relative overflow-hidden scroll-mt-24">
       <div className="floating-orb w-72 h-72 bg-accent right-0 top-20" />
       <div className="container mx-auto px-4 relative z-10 max-w-2xl">
         <ScrollReveal>

@@ -8,7 +8,7 @@ const scrollToId = (id: string) => (e: React.MouseEvent) => {
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="floating-orb w-96 h-96 bg-primary top-10 -left-48" />
       <div className="floating-orb w-72 h-72 bg-accent bottom-20 -right-36" style={{ animationDelay: "3s" }} />
       <div className="floating-orb w-64 h-64 bg-primary top-1/2 left-1/3" style={{ animationDelay: "5s", opacity: 0.08 }} />

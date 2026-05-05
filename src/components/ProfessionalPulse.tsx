@@ -62,7 +62,7 @@ const ProfessionalPulse = () => {
   const heatmapUrl = `https://ghchart.rshah.org/8b5cf6/${GITHUB_USER}`;
 
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
+    <section id="professional-pulse" className="py-16 md:py-24 relative overflow-hidden scroll-mt-24">
       <div className="hidden md:block floating-orb w-72 h-72 bg-primary -right-36 top-20" style={{ animationDelay: "2s" }} />
 
       <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">

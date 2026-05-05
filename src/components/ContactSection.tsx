@@ -55,7 +55,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 relative">
+    <section id="proposal" className="py-24 relative scroll-mt-24">
       <div className="floating-orb w-96 h-96 bg-primary -right-48 bottom-0" />
 
       <div className="container mx-auto px-4 relative z-10">
