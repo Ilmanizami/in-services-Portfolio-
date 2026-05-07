@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import CatalogBanner from "@/components/CatalogBanner";
 import AboutSection from "@/components/AboutSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import EngineeringLab from "@/components/EngineeringLab";
@@ -21,6 +22,8 @@ const Index = () => {
       <AnimatedBackground />
       <Navbar />
       <HeroSection />
+      <div className="section-divider" />
+      <CatalogBanner />
       <div className="section-divider" />
       <AboutSection />
       <div className="section-divider" />
