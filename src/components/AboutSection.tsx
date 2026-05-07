@@ -72,7 +72,24 @@ const AboutSection = () => {
           </ScrollReveal>
         </div>
 
-        <div className="space-y-6 mb-16 perspective-container">
+        <div className="max-w-4xl mx-auto mb-16">
+          <ScrollReveal delay={150}>
+            <div className="grid md:grid-cols-2 gap-5">
+              <div className="glass-card-3d p-6 oval-glow rounded-xl">
+                <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Professional Identity</p>
+                <p className="text-sm text-foreground/90">
+                  Final-year BSCS Student (DUET), Visual Animator, and Graphic Designer.
+                </p>
+              </div>
+              <div className="glass-card-3d p-6 oval-glow rounded-xl">
+                <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-2">Specialization</p>
+                <p className="text-sm text-foreground/90">
+                  2D / 3D Art, Motion Graphics, and Premium Printing Solutions.
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
           {serviceGroups.map((g, gi) => (
             <ScrollReveal key={g.title} delay={gi * 80}>
               <div>

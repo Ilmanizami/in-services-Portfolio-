@@ -21,7 +21,10 @@ const CatalogBanner = () => {
 
               <a
                 href="/catalog.pdf"
-                download
+                download="IN_Services_Brochure.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                type="application/pdf"
                 className="group mt-4 inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-bold tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_24px_hsl(150_100%_45%/0.6),0_0_0_2px_hsl(150_100%_45%/0.8)]"
                 style={{ willChange: "transform" }}
               >
