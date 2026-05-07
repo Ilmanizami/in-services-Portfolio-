@@ -90,6 +90,8 @@ const AboutSection = () => {
             </div>
           </ScrollReveal>
         </div>
+
+        <div className="space-y-6 mb-16 perspective-container">
           {serviceGroups.map((g, gi) => (
             <ScrollReveal key={g.title} delay={gi * 80}>
               <div>
