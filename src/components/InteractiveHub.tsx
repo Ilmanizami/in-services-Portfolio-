@@ -170,7 +170,7 @@ const InteractiveHub = () => {
                     className="text-primary"
                     style={{ color: isActive ? "hsl(150 100% 55%)" : undefined }}
                   />
-                  <span className="text-[10px] font-semibold mt-1 px-1 leading-tight text-foreground">
+                  <span className="text-[8.5px] font-semibold mt-1 px-1 leading-[1.05] text-foreground">
                     {s.title}
                   </span>
                 </button>
