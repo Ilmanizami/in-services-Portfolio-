@@ -133,6 +133,11 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
+                {"badge" in cat && (cat as { badge?: string }).badge && (
+                  <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/15 border border-primary/40 text-[10px] font-bold uppercase tracking-wide text-primary self-start animate-pulse-glow">
+                    🎓 {(cat as { badge: string }).badge}
+                  </div>
+                )}
               </div>
             ))}
           </div>
