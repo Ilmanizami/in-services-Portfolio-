@@ -36,8 +36,8 @@ const InteractiveHub = () => {
 
   useEffect(() => {
     const update = () => {
-      const w = containerRef.current?.offsetWidth ?? 560;
-      setSize(Math.min(640, Math.max(360, w)));
+      const w = containerRef.current?.offsetWidth ?? 640;
+      setSize(Math.min(720, Math.max(400, w)));
     };
     update();
     window.addEventListener("resize", update);
