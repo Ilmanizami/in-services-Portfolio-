@@ -18,6 +18,7 @@ const navItems: NavItem[] = [
   { label: "Services", id: "creative-works" },
   { label: "Store", id: "digital-tools" },
   { label: "Reviews", id: "feedback" },
+  { label: "Careers", path: "/careers" },
   { label: "Contact", id: "proposal" },
 ];
 
