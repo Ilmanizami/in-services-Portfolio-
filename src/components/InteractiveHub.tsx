@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import {
-  Palette, Video, Code, GraduationCap, Target, Briefcase, Camera, Shirt, Printer,
+  Palette, Video, Code, GraduationCap, Target, Briefcase, PenTool, Printer,
+  Zap, Layout, ClipboardCheck, Shapes, Key, Database,
 } from "lucide-react";
 import { ScrollReveal } from "@/hooks/useScrollAnimation";
 
@@ -12,14 +13,19 @@ type Service = {
 };
 
 const services: Service[] = [
-  { id: "graphic", title: "Graphic Designing", short: "High-quality 2D/3D Art & Character Illustrations.", Icon: Palette },
+  { id: "graphic", title: "Graphic Designing", short: "2D, 3D, Pixel Art, V-Tubers, Labels & Family Trees.", Icon: Palette },
   { id: "video", title: "Video Editing", short: "Reels, motion graphics & long-form animated content.", Icon: Video },
-  { id: "web", title: "Portfolio Web Design", short: "Premium personal & business portfolio websites.", Icon: Code },
-  { id: "fyp", title: "FYP Services", short: "End-to-end Final Year Project documentation & support.", Icon: GraduationCap },
-  { id: "client", title: "Client Hunter", short: "Lead generation & outreach for freelancers and brands.", Icon: Target },
+  { id: "art3d", title: "2D/3D Art & Animation", short: "High-fidelity models & character animations.", Icon: Shapes },
+  { id: "uiux", title: "UI/UX Designer", short: "User-centric interfaces & seamless experiences.", Icon: Layout },
+  { id: "automation", title: "Automation Workflow", short: "Optimizing business with AI & auto-flows.", Icon: Zap },
+  { id: "pm", title: "Project Manager", short: "End-to-end execution & team coordination.", Icon: ClipboardCheck },
+  { id: "content", title: "Content Creation", short: "Social media strategy & viral storytelling.", Icon: PenTool },
+  { id: "tools", title: "Digital Tools Subscription", short: "Premium access to Canva, Adobe & AI tools.", Icon: Key },
+  { id: "data", title: "Data Entry & Admin", short: "Accurate data management & virtual assistance.", Icon: Database },
+  { id: "fyp", title: "University Solutions", short: "Custom assignments, FYP & documentation.", Icon: GraduationCap },
+  { id: "client", title: "Client Hunter", short: "Lead generation & outreach for brands.", Icon: Target },
   { id: "hr", title: "HR Services", short: "Resume design, hiring support & talent matching.", Icon: Briefcase },
-  { id: "content", title: "Content Creation", short: "Social-ready content, scripting & visual assets.", Icon: Camera },
-  { id: "apparel", title: "Apparel & T-Shirt", short: "Custom T-shirt design & premium-quality printing.", Icon: Shirt },
+  { id: "web", title: "Portfolio Web Design", short: "Premium personal & business portfolio sites.", Icon: Code },
   { id: "print", title: "Printing Hub", short: "Cards, panaflex, stickers & wedding stationery.", Icon: Printer },
 ];
 
