@@ -20,7 +20,7 @@ const CatalogBanner = () => {
               </p>
 
               <a
-                href="/catalog.pdf"
+                href="https://vyqeuvnldgecooxxuidh.supabase.co/storage/v1/object/public/brochures/catalog.pdf"
                 download="IN_Services_Brochure.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
