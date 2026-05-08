@@ -24,6 +24,8 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <div className="section-divider" />
+      <InteractiveHub />
+      <div className="section-divider" />
       <CatalogBanner />
       <div className="section-divider" />
       <AboutSection />
