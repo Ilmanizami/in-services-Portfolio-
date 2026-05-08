@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import InteractiveHub from "@/components/InteractiveHub";
 import CatalogBanner from "@/components/CatalogBanner";
 import AboutSection from "@/components/AboutSection";
 import ExperienceSection from "@/components/ExperienceSection";
@@ -22,6 +23,8 @@ const Index = () => {
       <AnimatedBackground />
       <Navbar />
       <HeroSection />
+      <div className="section-divider" />
+      <InteractiveHub />
       <div className="section-divider" />
       <CatalogBanner />
       <div className="section-divider" />
