@@ -45,6 +45,7 @@ const printingHub = [
     title: "Academic & Professional",
     icon: GraduationCap,
     services: ["Assignment Printing", "FYP (Final Year Project) Documents", "Panaflex Printing"],
+    badge: "Special Discounts for DUET Students!",
   },
   {
     id: "stickers",
