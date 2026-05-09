@@ -49,7 +49,7 @@ const InteractiveHub = () => {
   const center = size / 2;
 
   return (
-    <section id="hub" className="py-20 relative scroll-mt-24">
+    <section id="hub" className="pt-8 pb-16 relative scroll-mt-24">
       <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal>
           <div className="text-center mb-8">
