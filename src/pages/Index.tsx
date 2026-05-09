@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import InteractiveHub from "@/components/InteractiveHub";
-import CatalogBanner from "@/components/CatalogBanner";
+import FAQSection from "@/components/FAQSection";
 import AboutSection from "@/components/AboutSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import EngineeringLab from "@/components/EngineeringLab";
@@ -26,7 +26,7 @@ const Index = () => {
       <div className="section-divider" />
       <InteractiveHub />
       <div className="section-divider" />
-      <CatalogBanner />
+      <FAQSection />
       <div className="section-divider" />
       <AboutSection />
       <div className="section-divider" />

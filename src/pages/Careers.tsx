@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { z } from "zod";
 import confetti from "canvas-confetti";
-import { GraduationCap, HeartHandshake, Briefcase, Loader2 } from "lucide-react";
+import { GraduationCap, HeartHandshake, Briefcase, Handshake, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedBackground from "@/components/AnimatedBackground";
@@ -13,12 +13,13 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
-type RoleType = "Internship" | "Volunteership" | "Paid Project";
+type RoleType = "Internship" | "Volunteership" | "Paid Project" | "Partnership";
 
 const tracks: { type: RoleType; title: string; desc: string; Icon: typeof GraduationCap }[] = [
   { type: "Internship", title: "Internship", desc: "Hands-on training in design, video, automation & project delivery. Mentorship from the founder, real client exposure, certificate on completion.", Icon: GraduationCap },
   { type: "Volunteership", title: "Volunteership", desc: "Community-driven roles: university outreach, content campaigns, event support. Flexible hours, recognition & portfolio credits.", Icon: HeartHandshake },
   { type: "Paid Project", title: "Paid Projects", desc: "Freelance & contract work for experienced creators — designers, editors, developers, automation specialists. Fair payouts per milestone.", Icon: Briefcase },
+  { type: "Partnership", title: "Partnerships & Collaborations", desc: "For established professionals, creators, or agencies looking to collaborate on high-end projects.", Icon: Handshake },
 ];
 
 const schema = z.object({
@@ -81,13 +82,19 @@ const Careers = () => {
     fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
     fire(0.1, { spread: 120, startVelocity: 45 });
 
-    // Mailto draft
+    // Mailto draft to ops inbox
     setTimeout(() => {
-      const subject = encodeURIComponent("Application Confirmation - IN-SERVICES");
+      const subject = encodeURIComponent(`New ${role} Application — IN-SERVICES`);
       const body = encodeURIComponent(
-        `Hi Ilma,\n\nThis confirms my application for the ${role} track at IN-SERVICES.\n\nName: ${parsed.data.full_name}\nEmail: ${parsed.data.email}\n\nLooking forward to connecting.\n`
+        `New application received via IN-SERVICES portal.\n\n` +
+          `Track: ${role}\n` +
+          `Name: ${parsed.data.full_name}\n` +
+          `Email: ${parsed.data.email}\n` +
+          `Portfolio: ${parsed.data.portfolio_link || "—"}\n\n` +
+          `Skills:\n${parsed.data.skills}\n\n` +
+          `Message:\n${parsed.data.message || "—"}\n`
       );
-      window.location.href = `mailto:ilmanizami2k23@gmail.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:freelancingbyin@gmail.com?subject=${subject}&body=${body}`;
     }, 1200);
   };
 
@@ -108,7 +115,7 @@ const Careers = () => {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-5 mb-14 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14 max-w-6xl mx-auto">
           {tracks.map((t, i) => (
             <ScrollReveal key={t.type} delay={i * 100}>
               <div className="rounded-2xl border border-border bg-card/60 backdrop-blur p-6 h-full flex flex-col transition-all duration-300 hover:scale-[1.02] hover:border-[hsl(45_100%_60%/0.6)] hover:shadow-[0_0_30px_hsl(45_100%_60%/0.35)]" style={{ transform: "none" }}>
@@ -135,12 +142,15 @@ const Careers = () => {
 
         <div id="apply-form" className="max-w-2xl mx-auto scroll-mt-24">
           <ScrollReveal>
-            <div className="glass-card-3d oval-glow p-6 md:p-8">
+            <div
+              className="rounded-2xl border border-border bg-card/60 backdrop-blur p-6 md:p-8 transition-all duration-300 hover:scale-[1.02] hover:border-[hsl(45_100%_60%/0.6)] hover:shadow-[0_0_30px_hsl(45_100%_60%/0.35)]"
+              style={{ transform: "none" }}
+            >
               <h2 className="font-display text-2xl font-bold mb-1">
                 {role ? `Apply: ${role}` : "Select a track to begin"}
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
-                {role ? "Fill in your details below. We'll review and reach out." : "Pick Internship, Volunteership, or Paid Projects above."}
+                {role ? "Fill in your details below. We'll review and reach out." : "Pick Internship, Volunteership, Paid Projects, or Partnerships above."}
               </p>
 
               {submitted ? (
