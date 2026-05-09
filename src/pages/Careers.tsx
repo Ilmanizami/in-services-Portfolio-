@@ -142,12 +142,15 @@ const Careers = () => {
 
         <div id="apply-form" className="max-w-2xl mx-auto scroll-mt-24">
           <ScrollReveal>
-            <div className="glass-card-3d oval-glow p-6 md:p-8">
+            <div
+              className="rounded-2xl border border-border bg-card/60 backdrop-blur p-6 md:p-8 transition-all duration-300 hover:scale-[1.02] hover:border-[hsl(45_100%_60%/0.6)] hover:shadow-[0_0_30px_hsl(45_100%_60%/0.35)]"
+              style={{ transform: "none" }}
+            >
               <h2 className="font-display text-2xl font-bold mb-1">
                 {role ? `Apply: ${role}` : "Select a track to begin"}
               </h2>
               <p className="text-sm text-muted-foreground mb-6">
-                {role ? "Fill in your details below. We'll review and reach out." : "Pick Internship, Volunteership, or Paid Projects above."}
+                {role ? "Fill in your details below. We'll review and reach out." : "Pick Internship, Volunteership, Paid Projects, or Partnerships above."}
               </p>
 
               {submitted ? (
