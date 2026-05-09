@@ -51,26 +51,6 @@ const InteractiveHub = () => {
   return (
     <section id="hub" className="py-20 relative scroll-mt-24">
       <div className="container mx-auto px-4 relative z-10">
-        {/* Identity header */}
-        <div className="grid md:grid-cols-2 gap-4 mb-10 max-w-4xl mx-auto">
-          <ScrollReveal>
-            <div className="glass-card-3d oval-glow p-5 text-center md:text-left">
-              <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-1">Identity</p>
-              <p className="text-sm text-foreground/90">
-                Final-year BSCS Student (DUET), Visual Animator, and Graphic Designer.
-              </p>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={120}>
-            <div className="glass-card-3d oval-glow p-5 text-center md:text-left">
-              <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-1">Specialization</p>
-              <p className="text-sm text-foreground/90">
-                2D / 3D Art, Motion Graphics, and Premium Printing Solutions.
-              </p>
-            </div>
-          </ScrollReveal>
-        </div>
-
         <ScrollReveal>
           <div className="text-center mb-8">
             <h2 className="font-display text-3xl md:text-4xl font-bold">
