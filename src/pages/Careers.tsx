@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { z } from "zod";
+import confetti from "canvas-confetti";
 import { GraduationCap, HeartHandshake, Briefcase, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
