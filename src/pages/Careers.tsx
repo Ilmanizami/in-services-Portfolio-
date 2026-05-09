@@ -64,7 +64,31 @@ const Careers = () => {
       return;
     }
     setSubmitted(true);
-    toast.success("Application submitted! We'll be in touch.");
+    toast.success("Welcome to the Empire! Your application has been secured.");
+
+    // Confetti cannon
+    const fire = (particleRatio: number, opts: confetti.Options) => {
+      confetti({
+        origin: { y: 0.7 },
+        particleCount: Math.floor(200 * particleRatio),
+        colors: ["#FFD700", "#10b981", "#a855f7", "#ffffff"],
+        ...opts,
+      });
+    };
+    fire(0.25, { spread: 26, startVelocity: 55 });
+    fire(0.2, { spread: 60 });
+    fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+    fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+    fire(0.1, { spread: 120, startVelocity: 45 });
+
+    // Mailto draft
+    setTimeout(() => {
+      const subject = encodeURIComponent("Application Confirmation - IN-SERVICES");
+      const body = encodeURIComponent(
+        `Hi Ilma,\n\nThis confirms my application for the ${role} track at IN-SERVICES.\n\nName: ${parsed.data.full_name}\nEmail: ${parsed.data.email}\n\nLooking forward to connecting.\n`
+      );
+      window.location.href = `mailto:ilmanizami2k23@gmail.com?subject=${subject}&body=${body}`;
+    }, 1200);
   };
 
   return (
