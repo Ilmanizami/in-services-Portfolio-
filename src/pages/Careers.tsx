@@ -111,7 +111,7 @@ const Careers = () => {
         <div className="grid md:grid-cols-3 gap-5 mb-14 max-w-6xl mx-auto">
           {tracks.map((t, i) => (
             <ScrollReveal key={t.type} delay={i * 100}>
-              <div className="glass-card-3d oval-glow p-6 h-full flex flex-col">
+              <div className="rounded-2xl border border-border bg-card/60 backdrop-blur p-6 h-full flex flex-col transition-all duration-300 hover:scale-[1.02] hover:border-[hsl(45_100%_60%/0.6)] hover:shadow-[0_0_30px_hsl(45_100%_60%/0.35)]" style={{ transform: "none" }}>
                 <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center mb-4">
                   <t.Icon className="text-primary" size={24} />
                 </div>
