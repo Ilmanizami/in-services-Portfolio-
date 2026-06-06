@@ -32,12 +32,12 @@ const services: Service[] = [
 const InteractiveHub = () => {
   const [active, setActive] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [size, setSize] = useState(560);
+  const [size, setSize] = useState(720);
 
   useEffect(() => {
     const update = () => {
-      const w = containerRef.current?.offsetWidth ?? 640;
-      setSize(Math.min(720, Math.max(400, w)));
+      const w = containerRef.current?.offsetWidth ?? 880;
+      setSize(Math.min(900, Math.max(520, w)));
     };
     update();
     window.addEventListener("resize", update);
@@ -45,8 +45,9 @@ const InteractiveHub = () => {
   }, []);
 
   const activeService = services.find((s) => s.id === active);
-  const radius = size * 0.4;
+  const radius = size * 0.44;
   const center = size / 2;
+
 
   return (
     <section id="hub" className="pt-8 pb-16 relative scroll-mt-24">
@@ -63,7 +64,7 @@ const InteractiveHub = () => {
         </ScrollReveal>
 
         {/* Desktop: 360° hub */}
-        <div ref={containerRef} className="hidden md:block relative mx-auto" style={{ maxWidth: 640 }}>
+        <div ref={containerRef} className="hidden md:block relative mx-auto" style={{ maxWidth: 900 }}>
           <div
             className="relative mx-auto"
             style={{ width: size, height: size, willChange: "transform" }}
@@ -89,13 +90,14 @@ const InteractiveHub = () => {
                     y1={center}
                     x2={x}
                     y2={y}
-                    stroke={isActive ? "hsl(150 100% 55%)" : "hsl(280 100% 70%)"}
+                    stroke={isActive ? "hsl(45 100% 60%)" : "hsl(280 100% 70%)"}
                     strokeWidth={isActive ? 2 : 1}
                     strokeOpacity={dim ? 0.15 : isActive ? 0.95 : 0.45}
                     style={{
-                      filter: isActive ? "drop-shadow(0 0 6px hsl(150 100% 55% / 0.8))" : undefined,
+                      filter: isActive ? "drop-shadow(0 0 6px hsl(45 100% 60% / 0.85))" : undefined,
                       transition: "all 0.25s ease",
                     }}
+
                   />
                 );
               })}
@@ -148,7 +150,7 @@ const InteractiveHub = () => {
                   <s.Icon
                     size={nodeSize * 0.32}
                     className="text-primary"
-                    style={{ color: isActive ? "hsl(150 100% 55%)" : undefined }}
+                    style={{ color: isActive ? "hsl(45 100% 60%)" : undefined }}
                   />
                   <span className="text-[8.5px] font-semibold mt-1 px-1 leading-[1.05] text-foreground">
                     {s.title}
