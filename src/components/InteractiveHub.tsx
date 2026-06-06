@@ -64,7 +64,7 @@ const InteractiveHub = () => {
         </ScrollReveal>
 
         {/* Desktop: 360° hub */}
-        <div ref={containerRef} className="hidden md:block relative mx-auto" style={{ maxWidth: 640 }}>
+        <div ref={containerRef} className="hidden md:block relative mx-auto" style={{ maxWidth: 900 }}>
           <div
             className="relative mx-auto"
             style={{ width: size, height: size, willChange: "transform" }}
