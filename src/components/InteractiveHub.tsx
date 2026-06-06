@@ -32,12 +32,12 @@ const services: Service[] = [
 const InteractiveHub = () => {
   const [active, setActive] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [size, setSize] = useState(560);
+  const [size, setSize] = useState(720);
 
   useEffect(() => {
     const update = () => {
-      const w = containerRef.current?.offsetWidth ?? 640;
-      setSize(Math.min(720, Math.max(400, w)));
+      const w = containerRef.current?.offsetWidth ?? 880;
+      setSize(Math.min(900, Math.max(520, w)));
     };
     update();
     window.addEventListener("resize", update);
@@ -45,8 +45,9 @@ const InteractiveHub = () => {
   }, []);
 
   const activeService = services.find((s) => s.id === active);
-  const radius = size * 0.4;
+  const radius = size * 0.44;
   const center = size / 2;
+
 
   return (
     <section id="hub" className="pt-8 pb-16 relative scroll-mt-24">
