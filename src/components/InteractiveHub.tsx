@@ -150,7 +150,7 @@ const InteractiveHub = () => {
                   <s.Icon
                     size={nodeSize * 0.32}
                     className="text-primary"
-                    style={{ color: isActive ? "hsl(150 100% 55%)" : undefined }}
+                    style={{ color: isActive ? "hsl(45 100% 60%)" : undefined }}
                   />
                   <span className="text-[8.5px] font-semibold mt-1 px-1 leading-[1.05] text-foreground">
                     {s.title}
