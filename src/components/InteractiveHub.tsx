@@ -90,13 +90,14 @@ const InteractiveHub = () => {
                     y1={center}
                     x2={x}
                     y2={y}
-                    stroke={isActive ? "hsl(150 100% 55%)" : "hsl(280 100% 70%)"}
+                    stroke={isActive ? "hsl(45 100% 60%)" : "hsl(280 100% 70%)"}
                     strokeWidth={isActive ? 2 : 1}
                     strokeOpacity={dim ? 0.15 : isActive ? 0.95 : 0.45}
                     style={{
-                      filter: isActive ? "drop-shadow(0 0 6px hsl(150 100% 55% / 0.8))" : undefined,
+                      filter: isActive ? "drop-shadow(0 0 6px hsl(45 100% 60% / 0.85))" : undefined,
                       transition: "all 0.25s ease",
                     }}
+
                   />
                 );
               })}
