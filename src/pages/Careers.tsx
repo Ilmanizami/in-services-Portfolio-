@@ -133,7 +133,7 @@ const Careers = () => {
                   className="w-full"
                   variant={role === t.type ? "default" : "secondary"}
                 >
-                  Apply for {t.title}
+                  Apply Now
                 </Button>
               </div>
             </ScrollReveal>
