@@ -99,11 +99,18 @@ const FAQSection = () => {
               <p className="text-xs text-foreground/70">
                 All 13 services, partnerships & policies — in one PDF.
               </p>
-              <a
-                href="https://vyqeuvnldgecooxxuidh.supabase.co/storage/v1/object/public/brochures/catalog.pdf"
-                download="IN_Services_Brochure.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const link = document.createElement("a");
+                  link.href = "/catalog.pdf";
+                  link.download = "IN-SERVICES_Luxury_Brochure.pdf";
+                  link.rel = "noopener noreferrer";
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
                 className="inline-flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl font-extrabold tracking-wide transition-all duration-300 hover:scale-[1.03]"
                 style={{
                   background: `linear-gradient(135deg, hsl(${GOLD}), hsl(38 100% 50%))`,
@@ -113,7 +120,7 @@ const FAQSection = () => {
               >
                 <Download size={18} />
                 DOWNLOAD BROCHURE
-              </a>
+              </button>
             </div>
           </ScrollReveal>
         </div>
